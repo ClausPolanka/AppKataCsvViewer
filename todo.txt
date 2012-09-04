@@ -1,0 +1,30 @@
+Nodes:
+
+Will .exe be created by VS by default in bin directory?
+
+Integration test without creating the .exe in code.
+
+Should I use a Mocking Framework for the Integration tests?
+
+If there is only data for a single page what options should be displayed?
+
+
+Tasks:
+
+CsvViewerEndToEndTest
+
+ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData
+- Temp Csv File Containing 4 Rows including header.
+- Main method initializes CsvViewer which reads CsvFile
+- CsvViewer formats csv data and passes it to Display
+- Display shows already formatted csv data as table
+- Temp Csv File must be deleted
+
+ForADefaultPageSizeOf3ViewerShowsFirstOfTwoPagesForGivenCsvData
+ForADefaultPageSizeOf3AfterUserEnteredNextCommandViewerShowsLastPageForGivenCsvData
+
+Protocol:
+
+Tasks                                                      Date          Pomodoro 
+Project Setup                                              04.09.2012    1  
+ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData    04.09.2012    1

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E5524133-BF0B-430D-91C8-118FF0F8080C}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{622DF3F4-64EC-46AE-ADCC-252DAE083E12}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppKataCsvViewer</RootNamespace>
-    <AssemblyName>AppKataCsvViewer</AssemblyName>
+    <RootNamespace>AppKataCsvViewerTests</RootNamespace>
+    <AssemblyName>AppKataCsvViewerTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>AppKataCsvViewer.MainEntryPoint</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,8 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainEntryPoint.cs" />
+    <Compile Include="CsvViewerEndToEndTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppKataCsvViewer\AppKataCsvViewer.csproj">
+      <Project>{E5524133-BF0B-430D-91C8-118FF0F8080C}</Project>
+      <Name>AppKataCsvViewer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
