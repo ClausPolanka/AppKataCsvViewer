@@ -11,13 +11,21 @@ namespace AppKataCsvViewerTests
         [Test]
         public void ForADefaultPageSizeOf3_ViewerShowsOnePageForGivenCsvData()
         {
-            // TODO: Create temporary persons.csv file
-            
+            var csvContent = new[] 
+            { 
+                "Name;Age;City", 
+                "Peter;42;New York", 
+                "Paul;57;London", 
+                "Mary;35;Munich" 
+            };
+
+            File.WriteAllLines("persons.csv", csvContent);
+
             MainEntryPoint.Main(new[] { "persons.csv" });
 
             // Assert against redirected console output.
 
-            // TODO: Delete temporary csv file.
+            File.Delete("persons.csv");
         }
 
         [SetUp]
