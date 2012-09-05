@@ -23,6 +23,15 @@ namespace AppKataCsvViewerTests
 
             MainEntryPoint.Main(new[] { "persons.csv" });
 
+            var expectedTable = new[]
+            {
+                "Name |Age|City    |",
+                "-----+---+--------+",
+                "Peter|42 |New York|", 
+                "Paul |57 |London  |", 
+                "Mary |35 |Munich  |" 
+            };
+
             // Assert against redirected console output.
 
             File.Delete("persons.csv");
