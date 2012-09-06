@@ -14,9 +14,8 @@ Tasks:
 CsvViewerEndToEndTest
 
 > ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData
-- Main method initializes CsvViewer which reads CsvFile
-- CsvViewer formats csv data and passes it to Display
-- Display shows already formatted csv data as table
+- Empty Row + User options must be displayed.
+- Refactoring: Create Object Structure for procedural code.
 
 > ForADefaultPageSizeOf3ViewerShowsFirstOfTwoPagesForGivenCsvData
 > ForADefaultPageSizeOf3AfterUserEnteredNextCommandViewerShowsLastPageForGivenCsvData
@@ -27,3 +26,4 @@ Tasks                                                      Date          Pomodor
 Project Setup                                              04.09.2012    1  
 ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData    04.09.2012    1 
 ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData    05.09.2012    2
+ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData    06.09.2012    4
