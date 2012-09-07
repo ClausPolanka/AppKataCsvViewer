@@ -14,7 +14,8 @@ namespace AppKataCsvViewer
         private const char CSV_SEPARATOR = ';';
         private const string HEADER_COLUMN_SEPARATOR = "+";
         private const int HEADER_ROW = 0;
-        
+        private const string EXIT_COMMAND = "eX(it";
+
         private static int[] maxColumnLengths;
 
         public static void Main(string[] args)
@@ -26,6 +27,27 @@ namespace AppKataCsvViewer
             maxColumnLengths = DetermineMaxColumnLengthsFor(csvRows);
 
             Show(ToFormattedRows(csvRows));
+            ExecuteCommandEnteredByUser();
+        }
+
+        private static void ExecuteCommandEnteredByUser()
+        {
+            string command;
+
+            while ( ! string.IsNullOrEmpty(command = Console.ReadLine()))
+            {
+                if (command.ToLower() == "x" || command.ToLower() == "exit")
+                {
+                    break;
+                }
+
+                // TODO: Execute entered command.
+            }
+
+            if (command == null || command.ToLower() != "x" && command.ToLower() != "exit")
+            {
+                throw new Exception("No command was entered by user");
+            }
         }
 
         private static int[] DetermineMaxColumnLengthsFor(string[] cvsRows)
@@ -87,6 +109,8 @@ namespace AppKataCsvViewer
                 Show(columns: formattedRows[rowIndex]);
                 ShowHeaderSeparator(rowIndex);
             }
+
+            ShowUserOptions();
         }
 
         private static void Show(List<string> columns)
@@ -115,6 +139,12 @@ namespace AppKataCsvViewer
         {
             for (int c = 0; c < columnLength; c++)
                 Console.Out.Write(HEADER_SEPARATOR_CHARACTER);
+        }
+
+        private static void ShowUserOptions()
+        {
+            Console.Out.WriteLine();
+            Console.Out.WriteLine(EXIT_COMMAND);
         }
     }
 }

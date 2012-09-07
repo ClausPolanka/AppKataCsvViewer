@@ -12,9 +12,10 @@ namespace AppKataCsvViewerTests
         private const string CSV_FILE_NAME = "persons.csv";
         private StringWriter generatedCsvOutput;
         private TextWriter stdout;
+        private TextReader stdin;
 
         [Test]
-        public void ForADefaultPageSizeOf3_ViewerShowsOnePageForGivenCsvData()
+        public void ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits()
         {
             var csvContent = new[] 
             { 
@@ -26,15 +27,18 @@ namespace AppKataCsvViewerTests
 
             CreateTemporaryCsvFileWith(csvContent);
 
+            UserWillEnterExitCommand();
+
             MainEntryPoint.Main(new[] { CSV_FILE_NAME });
 
             var expected = "Name |Age|City    |" + NEW_LINE + 
                            "-----+---+--------+" + NEW_LINE +
                            "Peter|42 |New York|" + NEW_LINE +
                            "Paul |57 |London  |" + NEW_LINE +
-                           "Mary |35 |Munich  |" + NEW_LINE;
+                           "Mary |35 |Munich  |" + NEW_LINE + NEW_LINE +
+                           "eX(it"               + NEW_LINE;
 
-           // TODO: Add empty row + user options
+            // TODO: user command must be called at this point in time. (Maybe use async Q)
 
             Assert.That(generatedCsvOutput.ToString, Is.EqualTo(expected), "formatted csv output");
         }
@@ -44,9 +48,15 @@ namespace AppKataCsvViewerTests
             File.WriteAllLines(CSV_FILE_NAME, csvContent);
         }
 
+        private void UserWillEnterExitCommand()
+        {
+            Console.SetIn(new StringReader("x"));
+        }
+
         [SetUp]
         public virtual void SetUp()
         {
+            stdin = Console.In;
             stdout = Console.Out;
             generatedCsvOutput = new StringWriter();
             Console.SetOut(generatedCsvOutput);
@@ -56,6 +66,7 @@ namespace AppKataCsvViewerTests
         public virtual void TearDown()
         {
             Console.SetOut(stdout);
+            Console.SetIn(stdin);
             generatedCsvOutput.Close();
             File.Delete(CSV_FILE_NAME);
         }

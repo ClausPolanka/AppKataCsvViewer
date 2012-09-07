@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppKataCsvViewer", "AppKata
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppKataCsvViewerTests", "AppKataCsvViewerTests\AppKataCsvViewerTests.csproj", "{622DF3F4-64EC-46AE-ADCC-252DAE083E12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppKataCsvViewerSpikes", "AppKataCsvViewerSpikes\AppKataCsvViewerSpikes.csproj", "{53BEBE85-3164-4794-B1B1-AA3912F9273D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{622DF3F4-64EC-46AE-ADCC-252DAE083E12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{622DF3F4-64EC-46AE-ADCC-252DAE083E12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{622DF3F4-64EC-46AE-ADCC-252DAE083E12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53BEBE85-3164-4794-B1B1-AA3912F9273D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53BEBE85-3164-4794-B1B1-AA3912F9273D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53BEBE85-3164-4794-B1B1-AA3912F9273D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53BEBE85-3164-4794-B1B1-AA3912F9273D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

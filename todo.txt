@@ -1,8 +1,10 @@
 Nodes:
 
-Will .exe be created by VS by default in bin directory?
+Q: Will .exe be created by VS by default in bin directory?
+A: No, in bin/Debug directory.
 
-Integration test without creating the .exe in code.
+Q: Integration test without creating the .exe in code.
+A: Yes, because currently it will be created by default by VS in bin/Debug directory.
 
 Should I use a Mocking Framework for the Integration tests?
 
@@ -13,8 +15,8 @@ Tasks:
 
 CsvViewerEndToEndTest
 
-> ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData
-- Empty Row + User options must be displayed.
+> ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits
+- Make user command in test async.
 - Refactoring: Create Object Structure for procedural code.
 
 > ForADefaultPageSizeOf3ViewerShowsFirstOfTwoPagesForGivenCsvData
@@ -24,6 +26,8 @@ Protocol:
 
 Tasks                                                      Date          Pomodoro 
 Project Setup                                              04.09.2012    1  
-ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData    04.09.2012    1 
-ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData    05.09.2012    2
-ForADefaultPageSizeOf3ViewerShowsOnePageForGivenCsvData    06.09.2012    4
+ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits    04.09.2012    1 
+ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits    05.09.2012    2
+ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits    06.09.2012    4
+ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits    06.09.2012    4
+ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits    07.09.2012    4
