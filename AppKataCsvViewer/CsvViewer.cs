@@ -26,7 +26,7 @@ namespace AppKataCsvViewer
 
         public void Show(string csvFileName)
         {
-            var csvRows = File.ReadAllLines(csvFileName);
+            string[] csvRows = File.ReadAllLines(csvFileName);
 
             maxColumnLengths = DetermineMaxColumnLengthsFor(csvRows);
 
@@ -134,7 +134,7 @@ namespace AppKataCsvViewer
         {
             string command;
 
-            while (!string.IsNullOrEmpty(command = commandReader.ReadCommand()))
+            while ( ! string.IsNullOrEmpty(command = commandReader.ReadCommand()))
             {
                 if (command.ToLower() == "x" || command.ToLower() == "exit")
                 {
@@ -143,10 +143,9 @@ namespace AppKataCsvViewer
 
                 // TODO: Execute entered command.
             }
-
             if (command == null || command.ToLower() != "x" && command.ToLower() != "exit")
             {
-                throw new Exception("No command was entered by user");
+                throw new Exception("No or wrong command was entered by user: " + command);
             }
         }
     }

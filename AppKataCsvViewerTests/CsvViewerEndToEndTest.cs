@@ -1,15 +1,16 @@
 ﻿using System;
 using System.IO;
-using AppKataCsvViewer;
 using NUnit.Framework;
 
 namespace AppKataCsvViewerTests
 {
     [TestFixture]
-    public class CsvViewerEndToEndTest : CommandReaderListener
+    public class CsvViewerEndToEndTest
     {
         private const string NEW_LINE = "\r\n";
         private const string CSV_FILE_NAME = "persons.csv";
+        private const string EXIT_COMMAND = "x";
+
         private StringWriter generatedCsvOutput;
         private TextWriter stdout;
         private TextReader stdin;
@@ -29,20 +30,26 @@ namespace AppKataCsvViewerTests
             CreateTemporaryCsvFileWith(csvContent);
 
             csvViewerRunner.ExecuteViewerFor(CSV_FILE_NAME);
+            csvViewerRunner.ReadsUserCommmand(EXIT_COMMAND);
 
-            var expected = "Name |Age|City    |" + NEW_LINE + 
-                           "-----+---+--------+" + NEW_LINE +
-                           "Peter|42 |New York|" + NEW_LINE +
-                           "Paul |57 |London  |" + NEW_LINE +
-                           "Mary |35 |Munich  |" + NEW_LINE + NEW_LINE +
-                           "eX(it"               + NEW_LINE;
+            var expected = "Name |Age|City    |" +
+                           "-----+---+--------+" +
+                           "Peter|42 |New York|" +
+                           "Paul |57 |London  |" +
+                           "Mary |35 |Munich  |" +
+                           "eX(it";
 
-            Assert.That(generatedCsvOutput.ToString, Is.EqualTo(expected), "formatted csv output");
+            Assert.That(WithoutLineBreaks(generatedCsvOutput), Is.EqualTo(expected), "formatted csv output");
         }
 
         private static void CreateTemporaryCsvFileWith(string[] csvContent)
         {
             File.WriteAllLines(CSV_FILE_NAME, csvContent);
+        }
+
+        private string WithoutLineBreaks(StringWriter stringWriter)
+        {
+            return stringWriter.ToString().Replace(NEW_LINE, string.Empty);
         }
 
         [SetUp]
@@ -52,7 +59,7 @@ namespace AppKataCsvViewerTests
             stdout = Console.Out;
             generatedCsvOutput = new StringWriter();
             Console.SetOut(generatedCsvOutput);
-            csvViewerRunner = new ApplicationTestExecutor(this);
+            csvViewerRunner = new ApplicationTestExecutor(generatedCsvOutput);
         }
 
         [TearDown]
@@ -62,11 +69,6 @@ namespace AppKataCsvViewerTests
             Console.SetIn(stdin);
             generatedCsvOutput.Close();
             File.Delete(CSV_FILE_NAME);
-        }
-
-        public void NotifyNewCommand()
-        {
-            Console.SetIn(new StringReader("x"));
         }
     }
 }
