@@ -13,6 +13,7 @@ namespace AppKataCsvViewerTests
         private StringWriter generatedCsvOutput;
         private TextWriter stdout;
         private TextReader stdin;
+        private ApplicationTestExecutor csvViewerRunner = new ApplicationTestExecutor();
 
         [Test]
         public void ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits()
@@ -29,7 +30,7 @@ namespace AppKataCsvViewerTests
 
             UserWillEnterExitCommand();
 
-            MainEntryPoint.Main(new[] { CSV_FILE_NAME });
+            csvViewerRunner.ExecuteViewerFor(CSV_FILE_NAME);
 
             var expected = "Name |Age|City    |" + NEW_LINE + 
                            "-----+---+--------+" + NEW_LINE +
