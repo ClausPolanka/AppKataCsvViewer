@@ -30,26 +30,6 @@ namespace AppKataCsvViewer
             ExecuteCommandEnteredByUser();
         }
 
-        private static void ExecuteCommandEnteredByUser()
-        {
-            string command;
-
-            while ( ! string.IsNullOrEmpty(command = Console.ReadLine()))
-            {
-                if (command.ToLower() == "x" || command.ToLower() == "exit")
-                {
-                    break;
-                }
-
-                // TODO: Execute entered command.
-            }
-
-            if (command == null || command.ToLower() != "x" && command.ToLower() != "exit")
-            {
-                throw new Exception("No command was entered by user");
-            }
-        }
-
         private static int[] DetermineMaxColumnLengthsFor(string[] cvsRows)
         {
             int numberOfColumns = cvsRows[HEADER_ROW].Split(CSV_SEPARATOR).Length;
@@ -145,6 +125,26 @@ namespace AppKataCsvViewer
         {
             Console.Out.WriteLine();
             Console.Out.WriteLine(EXIT_COMMAND);
+        }
+
+        private static void ExecuteCommandEnteredByUser()
+        {
+            string command;
+
+            while ( ! string.IsNullOrEmpty(command = Console.ReadLine()))
+            {
+                if (command.ToLower() == "x" || command.ToLower() == "exit")
+                {
+                    break;
+                }
+
+                // TODO: Execute entered command.
+            }
+
+            if (command == null || command.ToLower() != "x" && command.ToLower() != "exit")
+            {
+                throw new Exception("No command was entered by user");
+            }
         }
     }
 }
