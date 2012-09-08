@@ -6,7 +6,7 @@ A: No, in bin/Debug directory.
 Q: Integration test without creating the .exe in code.
 A: Yes, because currently it will be created by default by VS in bin/Debug directory.
 
-Should I use a Mocking Framework for the Integration tests?
+Should I use a Mocking Framework for the Integration tests?    
 
 If there is only data for a single page what options should be displayed?
 
@@ -16,7 +16,7 @@ Tasks:
 CsvViewerEndToEndTest
 
 > ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits
-- Make user command in test async.
+- Make user command in test async. (Currently command will be set after test was notfied).
 - Refactoring: Create Object Structure for procedural code.
 
 > ForADefaultPageSizeOf3ViewerShowsFirstOfTwoPagesForGivenCsvData
@@ -31,3 +31,4 @@ ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvData
 ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits    06.09.2012    4
 ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits    06.09.2012    4
 ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits    07.09.2012    4
+ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits    08.09.2012    1
