@@ -2,11 +2,21 @@
 {
     public class MainEntryPoint
     {
+        public static CommandReaderListener commandReaderListener = new CommandReaderListenerNullObject();
+        
         private const int FILE_NAME = 0;
 
         public static void Main(string[] args)
         {
-            new CsvViewer().Show(args[FILE_NAME]);
+            var csvViewer = new CsvViewer(new ConsoleCommandReader(commandReaderListener));
+            csvViewer.Show(args[FILE_NAME]);
+        }
+    }
+
+    public class CommandReaderListenerNullObject : CommandReaderListener
+    {
+        public void NotifyNewCommand()
+        {
         }
     }
 }

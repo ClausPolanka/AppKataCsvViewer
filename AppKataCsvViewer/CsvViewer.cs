@@ -17,6 +17,13 @@ namespace AppKataCsvViewer
 
         private int[] maxColumnLengths;
 
+        private readonly CommandReader commandReader;
+
+        public CsvViewer(CommandReader commandReader)
+        {
+            this.commandReader = commandReader;
+        }
+
         public void Show(string csvFileName)
         {
             var csvRows = File.ReadAllLines(csvFileName);
@@ -127,7 +134,7 @@ namespace AppKataCsvViewer
         {
             string command;
 
-            while (!string.IsNullOrEmpty(command = ReadCommand()))
+            while (!string.IsNullOrEmpty(command = commandReader.ReadCommand()))
             {
                 if (command.ToLower() == "x" || command.ToLower() == "exit")
                 {
@@ -141,11 +148,6 @@ namespace AppKataCsvViewer
             {
                 throw new Exception("No command was entered by user");
             }
-        }
-
-        private string ReadCommand()
-        {
-            return Console.ReadLine();
         }
     }
 }

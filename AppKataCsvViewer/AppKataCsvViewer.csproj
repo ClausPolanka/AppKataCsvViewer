@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandReader.cs" />
+    <Compile Include="CommandReaderListener.cs" />
+    <Compile Include="ConsoleCommandReader.cs" />
     <Compile Include="CsvViewer.cs" />
     <Compile Include="MainEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
