@@ -46,7 +46,10 @@
     <Compile Include="CommandReader.cs" />
     <Compile Include="CommandReaderListener.cs" />
     <Compile Include="ConsoleCommandReader.cs" />
+    <Compile Include="ConsoleDisplay.cs" />
+    <Compile Include="CsvTable.cs" />
     <Compile Include="CsvViewer.cs" />
+    <Compile Include="Display.cs" />
     <Compile Include="MainEntryPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
