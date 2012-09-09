@@ -13,42 +13,49 @@ namespace AppKataCsvViewer
         private const char CSV_SEPARATOR = ';';
         private const string HEADER_COLUMN_SEPARATOR = "+";
         private const int HEADER_ROW = 0;
+        private const int HEADER = 1;
         private const string EXIT_COMMAND = "eX(it";
-
-        private int[] maxColumnLengths;
+        private const string ALL_USER_OPTIONS = "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
 
         private readonly CommandReader commandReader;
+
+        private int[] maxColumnLengths;
+        private bool allUserOptionsMustBeShown;
 
         public CsvViewer(CommandReader commandReader)
         {
             this.commandReader = commandReader;
         }
 
-        public void Show(string csvFileName)
+        public void Show(string csvFileName, int pageSize = 3)
         {
             string[] csvRows = File.ReadAllLines(csvFileName);
 
-            maxColumnLengths = DetermineMaxColumnLengthsFor(csvRows);
+            if ((csvRows.Length - HEADER) > pageSize)
+            {
+                allUserOptionsMustBeShown = true;
+            }
 
-            Show(ToFormattedRows(csvRows));
+            maxColumnLengths = DetermineMaxColumnLengthsFor(csvRows, pageSize);
+
+            Show(ToFormattedRows(csvRows), pageSize);
             ExecuteCommandEnteredByUser();
         }
-        private int[] DetermineMaxColumnLengthsFor(string[] cvsRows)
+        private int[] DetermineMaxColumnLengthsFor(string[] cvsRows, int pageSize)
         {
             int numberOfColumns = cvsRows[HEADER_ROW].Split(CSV_SEPARATOR).Length;
 
             int[] maxColumnLengths = new int[numberOfColumns];
 
-            foreach (string cvsRow in cvsRows)
+            for (int colIndex = 0; colIndex < pageSize; colIndex++)
             {
+                string cvsRow = cvsRows[colIndex];
                 string[] words = cvsRow.Split(CSV_SEPARATOR);
 
                 for (int i = 0; i < words.Length; i++)
                 {
                     if (maxColumnLengths[i] < words[i].Length)
-                    {
                         maxColumnLengths[i] = words[i].Length;
-                    }
                 }
             }
 
@@ -85,9 +92,9 @@ namespace AppKataCsvViewer
             return formattedWord + COLUMN_SEPARATOR;
         }
 
-        private void Show(List<List<string>> formattedRows)
+        private void Show(List<List<string>> formattedRows, int pageSize)
         {
-            for (int rowIndex = 0; rowIndex < formattedRows.Count; rowIndex++)
+            for (int rowIndex = 0; rowIndex < (pageSize + HEADER); rowIndex++)
             {
                 Show(columns: formattedRows[rowIndex]);
                 ShowHeaderSeparator(rowIndex);
@@ -127,7 +134,14 @@ namespace AppKataCsvViewer
         private void ShowUserOptions()
         {
             Console.Out.WriteLine();
-            Console.Out.WriteLine(EXIT_COMMAND);
+            
+            if (allUserOptionsMustBeShown)
+            {
+                Console.Out.WriteLine(ALL_USER_OPTIONS);
+            } else
+            {
+                Console.Out.WriteLine(EXIT_COMMAND);
+            }
         }
 
         private void ExecuteCommandEnteredByUser()
