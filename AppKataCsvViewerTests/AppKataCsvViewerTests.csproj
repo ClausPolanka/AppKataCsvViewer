@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="ApplicationTestExecutor.cs" />
     <Compile Include="CsvViewerEndToEndTest.cs" />
+    <Compile Include="PageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TableTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppKataCsvViewer\AppKataCsvViewer.csproj">

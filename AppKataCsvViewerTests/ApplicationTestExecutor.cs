@@ -32,12 +32,12 @@ namespace AppKataCsvViewerTests
             }
             catch (Exception e)
             {
-                ResetConsoleOutput();
+                ClearConsoleOutputBuffer();
                 Console.Out.Write(e.Message);
             }
         }
 
-        private void ResetConsoleOutput()
+        private void ClearConsoleOutputBuffer()
         {
             StringBuilder sb = consoleOutput.GetStringBuilder();
             sb.Remove(0, sb.Length - 1);

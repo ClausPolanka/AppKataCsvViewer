@@ -1,4 +1,6 @@
-﻿namespace AppKataCsvViewer
+﻿using System.Collections.Generic;
+
+namespace AppKataCsvViewer
 {
     public class MainEntryPoint
     {
@@ -9,8 +11,13 @@
 
         public static void Main(string[] args)
         {
+            List<DataRecord> dataRecords = new FileCsvContentLoader().LoadDataRecords(args[FILE_NAME]);
+
+            var table = new Table(dataRecords, pageSize: 3);
+
             var csvViewer = new CsvViewer(new ConsoleCommandReader(commandReaderListener), new ConsoleDisplay());
-            csvViewer.Show(args[FILE_NAME]);
+            
+            csvViewer.Show(table);
         }
     }
 

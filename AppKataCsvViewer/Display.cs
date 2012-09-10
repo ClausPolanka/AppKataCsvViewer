@@ -2,6 +2,6 @@ namespace AppKataCsvViewer
 {
     public interface Display
     {
-        void Show(CsvTable csvTable);
+        void Show(Table table);
     }
 }
