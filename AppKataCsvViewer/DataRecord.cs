@@ -11,14 +11,27 @@ namespace AppKataCsvViewer
             words.Add(word);
         }
 
-        public int ColumnCount
+        public int ColumnCount { get { return words.Count; } }
+        public List<string> Words { get { return words; } }
+
+        public override bool Equals(object obj)
         {
-            get { return words.Count; }
+            return ToString() == obj.ToString();
         }
 
-        public List<string> Words
+        public override string ToString()
         {
-            get { return words; }
+            string dataRecord = string.Empty;
+
+            foreach (var w in Words)
+                dataRecord += w + " ";
+
+            return dataRecord;
+        }
+
+        public override int GetHashCode()
+        {
+            return ToString().GetHashCode();
         }
     }
 }

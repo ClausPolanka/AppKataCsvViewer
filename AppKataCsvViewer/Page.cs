@@ -32,5 +32,25 @@ namespace AppKataCsvViewer
         }
 
         public List<DataRecord> DataRecords { get { return dataRecords; } }
+
+        public override bool Equals(object obj)
+        {
+            return ToString() == obj.ToString();
+        }
+
+        public override int GetHashCode()
+        {
+            return ToString().GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            string page = string.Empty;
+
+            foreach (var r in dataRecords)
+                page += r + " ";
+
+            return page;
+        }
     }
 }
