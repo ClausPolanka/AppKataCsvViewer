@@ -9,6 +9,7 @@ namespace AppKataCsvViewerTests
     {
         private const string NEW_LINE = "\r\n";
         private const string CSV_FILE_NAME = "persons.csv";
+        private const string NEXT_COMMAND = "n";
         private const string EXIT_COMMAND = "x";
 
         private StringWriter generatedCsvOutput;
@@ -70,6 +71,37 @@ namespace AppKataCsvViewerTests
                            "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
 
             Assert.That(WithoutLineBreaks(generatedCsvOutput), Is.EqualTo(expected), "formatted csv output");
+        }
+
+        [Test]
+        public void ForADefaultPageSizeOf3AndUserEntersNextAndExitCommand_ViewerShowsSecondPageForGivenCsvDataAndExits()
+        {
+            var csvContent = new[] 
+            { 
+                "Name;Age;City", 
+                "Peter;42;New York", 
+                "Paul;57;London", 
+                "Mary;35;Munich",
+                "Jaques;66;Paris",
+                "Yuri;23;Moscow",
+                "Stephanie;47;Stockholm",
+                "Nadia;29;Madrid"
+            };
+
+            CreateTemporaryCsvFileWith(csvContent);
+
+            csvViewerRunner.ExecuteViewerFor(CSV_FILE_NAME);
+            csvViewerRunner.ReadsUserCommmand(NEXT_COMMAND);
+            csvViewerRunner.ReadsUserCommmand(EXIT_COMMAND);
+
+            var nextPage = "Name     |Age|City     |" +
+                           "---------+---+---------+" +
+                           "Jaques   |66 |Paris    |" +
+                           "Yuri     |23 |Moscow   |" +
+                           "Stephanie|35 |Stockholm|" +
+                           "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
+
+            Assert.That(WithoutLineBreaks(generatedCsvOutput), Is.EqualTo(nextPage), "formatted csv output");
         }
 
         private static void CreateTemporaryCsvFileWith(string[] csvContent)

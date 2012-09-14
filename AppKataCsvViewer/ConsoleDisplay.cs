@@ -17,15 +17,16 @@ namespace AppKataCsvViewer
         private const string COLUMN_ROW_SEPARATOR = "+";
         private const string ROW_SEPERATOR_CHARACTER = "-";
 
+        private int pageNumber;
+
         public void Show(Table table)
         {
-            Page page = table.Pages.First(); // TODO: All pages must be executed
+            Page page = table.Pages[pageNumber++];
 
             PrintHeaderFor(page);
             PrintDataRecordsFor(page);
             PrintUserOptionsFor(table.Pages);
         }
-
 
         private void PrintHeaderFor(Page page)
         {

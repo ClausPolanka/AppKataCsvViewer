@@ -16,10 +16,10 @@ namespace AppKataCsvViewer
         public void Show(Table table)
         {
             display.Show(table);
-            ExecuteCommandEnteredByUser();
+            ExecuteCommandEnteredByUser(table);
         }
 
-        private void ExecuteCommandEnteredByUser()
+        private void ExecuteCommandEnteredByUser(Table table)
         {
             string command;
 
@@ -28,6 +28,10 @@ namespace AppKataCsvViewer
                 if (command.ToLower() == "x" || command.ToLower() == "exit")
                 {
                     break;
+                }
+                if (command.ToLower() == "n" || command.ToLower() == "next")
+                {
+                    display.Show(table);
                 }
 
                 // TODO: Execute entered command.
