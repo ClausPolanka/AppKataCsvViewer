@@ -1,7 +1,7 @@
 ﻿using AppKataCsvViewer;
 using NUnit.Framework;
 
-namespace AppKataCsvViewerTests
+namespace AppKataCsvViewerUnitTests
 {
     [TestFixture]
     public class PageTest

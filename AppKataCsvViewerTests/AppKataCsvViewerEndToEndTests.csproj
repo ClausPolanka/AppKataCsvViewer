@@ -8,8 +8,8 @@
     <ProjectGuid>{622DF3F4-64EC-46AE-ADCC-252DAE083E12}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppKataCsvViewerTests</RootNamespace>
-    <AssemblyName>AppKataCsvViewerTests</AssemblyName>
+    <RootNamespace>AppKataCsvViewerEndToEndTests</RootNamespace>
+    <AssemblyName>AppKataCsvViewerEndToEndTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,9 +43,7 @@
   <ItemGroup>
     <Compile Include="ApplicationTestExecutor.cs" />
     <Compile Include="CsvViewerEndToEndTest.cs" />
-    <Compile Include="PageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TableTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AppKataCsvViewer\AppKataCsvViewer.csproj">

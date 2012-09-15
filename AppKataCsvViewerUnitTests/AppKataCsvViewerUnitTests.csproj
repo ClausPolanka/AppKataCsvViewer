@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{53BEBE85-3164-4794-B1B1-AA3912F9273D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{616879E7-0268-45B0-AE5C-67212B4C2BFD}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AppKataCsvViewerSpikes</RootNamespace>
-    <AssemblyName>AppKataCsvViewerSpikes</AssemblyName>
+    <RootNamespace>AppKataCsvViewerUnitTests</RootNamespace>
+    <AssemblyName>AppKataCsvViewerUnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,9 +30,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>AppKataCsvViewerSpikes.ReadFromStandardInSpike</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -44,15 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReadFromStandardInSpike.cs" />
+    <Compile Include="PageTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadFromStandardInTest.cs" />
-    <Compile Include="RedirectStandardInSpike.cs" />
+    <Compile Include="TableTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AppKataCsvViewerTests\AppKataCsvViewerEndToEndTests.csproj">
-      <Project>{622DF3F4-64EC-46AE-ADCC-252DAE083E12}</Project>
-      <Name>AppKataCsvViewerEndToEndTests</Name>
+    <ProjectReference Include="..\AppKataCsvViewer\AppKataCsvViewer.csproj">
+      <Project>{E5524133-BF0B-430D-91C8-118FF0F8080C}</Project>
+      <Name>AppKataCsvViewer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using AppKataCsvViewer;
 
-namespace AppKataCsvViewerTests
+namespace AppKataCsvViewerEndToEndTests
 {
     public class ApplicationTestExecutor : CommandReaderListener
     {
@@ -45,13 +45,17 @@ namespace AppKataCsvViewerTests
 
         public void ReadsUserCommmand(string cmd)
         {
+            if (cmd.ToLower() == "n" || cmd.ToLower() == "next")
+            {
+                ClearConsoleOutputBuffer();
+            }
             Console.SetIn(new StringReader(cmd));
-            thread.Join();
+            thread.Join(200);
         }
 
         public void NotifyNewCommand()
         {
-            Thread.Sleep(500);
+            Thread.Sleep(200);
         }
     }
 }

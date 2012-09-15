@@ -2,7 +2,7 @@
 using System.IO;
 using NUnit.Framework;
 
-namespace AppKataCsvViewerTests
+namespace AppKataCsvViewerEndToEndTests
 {
     [TestFixture]
     public class CsvViewerEndToEndTest
@@ -98,7 +98,37 @@ namespace AppKataCsvViewerTests
                            "---------+---+---------+" +
                            "Jaques   |66 |Paris    |" +
                            "Yuri     |23 |Moscow   |" +
-                           "Stephanie|35 |Stockholm|" +
+                           "Stephanie|47 |Stockholm|" +
+                           "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
+
+            Assert.That(WithoutLineBreaks(generatedCsvOutput), Is.EqualTo(nextPage), "formatted csv output");
+        }
+
+        [Test]
+        public void ForADefaultPageSizeOf3AndUserEntersNextNextAndExitCommand_ViewerShowsLastPageForGivenCsvDataAndExits()
+        {
+            var csvContent = new[] 
+            { 
+                "Name;Age;City", 
+                "Peter;42;New York", 
+                "Paul;57;London", 
+                "Mary;35;Munich",
+                "Jaques;66;Paris",
+                "Yuri;23;Moscow",
+                "Stephanie;47;Stockholm",
+                "Nadia;29;Madrid"
+            };
+
+            CreateTemporaryCsvFileWith(csvContent);
+
+            csvViewerRunner.ExecuteViewerFor(CSV_FILE_NAME);
+            csvViewerRunner.ReadsUserCommmand(NEXT_COMMAND);
+            csvViewerRunner.ReadsUserCommmand(NEXT_COMMAND);
+            csvViewerRunner.ReadsUserCommmand(EXIT_COMMAND);
+
+            var nextPage = "Name |Age|City  |" +
+                           "-----+---+------+" +
+                           "Nadia|29 |Madrid|" +
                            "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
 
             Assert.That(WithoutLineBreaks(generatedCsvOutput), Is.EqualTo(nextPage), "formatted csv output");
@@ -111,7 +141,7 @@ namespace AppKataCsvViewerTests
 
         private string WithoutLineBreaks(StringWriter stringWriter)
         {
-            return stringWriter.ToString().Replace(NEW_LINE, string.Empty);
+            return stringWriter.ToString().Replace(NEW_LINE, string.Empty).Replace("\n", string.Empty);
         }
 
         [SetUp]
