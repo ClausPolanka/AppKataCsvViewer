@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AppKataCsvViewer
 {
@@ -33,7 +32,7 @@ namespace AppKataCsvViewer
             List<string> headerColumns = page.DataRecords[INDEX_OF_HEADER].Words;
 
             for (int i = 0; i < headerColumns.Count; i++)
-                Console.Out.WriteLine(
+                Console.Out.Write(
                     headerColumns[i] + WhiteSpacesFor(headerColumns[i], page.MaxColumnLengths()[i]) + COLUMN_SEPARATOR);
 
             PrintHeaderLine(page.MaxColumnLengths());
@@ -54,6 +53,8 @@ namespace AppKataCsvViewer
 
         private void PrintHeaderLine(IEnumerable<int> maxColumnLengths)
         {
+            Console.WriteLine();
+
             foreach (int maxColumnLength in maxColumnLengths)
             {
                 for (int i = 0; i < maxColumnLength; i++)
@@ -65,16 +66,25 @@ namespace AppKataCsvViewer
 
         private void PrintDataRecordsFor(Page page)
         {
+            Console.WriteLine();
+
             List<DataRecord> dataRecords = page.DataRecords;
 
             for (int recordIndex = INDEX_OF_FIRST_RECORD; recordIndex < dataRecords.Count; recordIndex++)
             {
-                for (int wordIndex = 0; wordIndex < dataRecords[recordIndex].ColumnCount; wordIndex++)
-                {
-                    string word = dataRecords[recordIndex].Words[wordIndex];
-                    Console.Out.Write(word + WhiteSpacesFor(word, page.MaxColumnLengths()[wordIndex]) + COLUMN_SEPARATOR);
-                }
+                PrintDataRecord(page, recordIndex, dataRecords);
             }
+        }
+
+        private void PrintDataRecord(Page page, int recordIndex, List<DataRecord> dataRecords)
+        {
+            for (int wordIndex = 0; wordIndex < dataRecords[recordIndex].ColumnCount; wordIndex++)
+            {
+                string word = dataRecords[recordIndex].Words[wordIndex];
+                Console.Out.Write(word + WhiteSpacesFor(word, page.MaxColumnLengths()[wordIndex]) + COLUMN_SEPARATOR);
+            }
+
+            Console.WriteLine();
         }
 
         private void PrintUserOptionsFor(List<Page> pages)

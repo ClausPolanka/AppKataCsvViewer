@@ -25,16 +25,16 @@ namespace AppKataCsvViewer
             
             while (recordsCopy.Skip(pos).Any())
             {
-                recordsCopy = recordsCopy.Skip(pos).ToList();
+                List<DataRecord> tmpRecords = recordsCopy.Skip(pos).ToList();
 
                 var page = new Page();
                 page.Add(Header);
 
-                foreach (DataRecord dataRecord in recordsCopy.Take(pageSize))
+                foreach (DataRecord dataRecord in tmpRecords.Take(pageSize))
                     page.Add(dataRecord);
 
                 pages.Add(page);
-                pos = pageSize;
+                pos += pageSize;
             }
         }
 
