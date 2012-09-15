@@ -35,7 +35,7 @@ namespace AppKataCsvViewer
 
         public override bool Equals(object obj)
         {
-            return ToString() == obj.ToString();
+            return ToString() == obj.ToString() && GetHashCode() == obj.GetHashCode();
         }
 
         public override int GetHashCode()

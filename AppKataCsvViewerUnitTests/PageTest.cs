@@ -27,5 +27,35 @@ namespace AppKataCsvViewerUnitTests
 
             Assert.AreEqual(expected, page.MaxColumnLengths(), "page max column lengths");
         }
+
+        [Test]
+        public void Equals_GivenTwoIdenticalDataRecordsForTwoPages_PagesAreEqual()
+        {
+            var dataRecord = new DataRecord();
+            dataRecord.Add("Word");
+
+            var page1 = new Page();
+            page1.Add(dataRecord);
+
+            var page2 = new Page();
+            page2.Add(dataRecord);
+
+            Assert.That(page1, Is.EqualTo(page2), "pages must be equal");
+        }
+
+        [Test]
+        public void DataRecords_GivenTwoIdenticalDataRecordsForTwoPages_PageDataRecordsAreEqual()
+        {
+            var dataRecord = new DataRecord();
+            dataRecord.Add("Word");
+
+            var page1 = new Page();
+            page1.Add(dataRecord);
+
+            var page2 = new Page();
+            page2.Add(dataRecord);
+
+            Assert.That(page1.DataRecords, Is.EqualTo(page2.DataRecords), "page data records must be equal");
+        }
     }
 }
