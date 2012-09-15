@@ -13,13 +13,14 @@ namespace AppKataCsvViewer
         public Table(List<DataRecord> dataRecords, int pageSize)
         {
             this.pageSize = pageSize;
-            SeperateIntoPages(new List<DataRecord>(dataRecords));
+            this.pages = ToPages(new List<DataRecord>(dataRecords));
         }
 
-        private void SeperateIntoPages(List<DataRecord> dataRecords)
+        private List<Page> ToPages(List<DataRecord> dataRecords)
         {
             Header = dataRecords[INDEX_OF_HEADER];
             dataRecords.RemoveAt(INDEX_OF_HEADER);
+            List<Page> pages = new List<Page>();
             int pos = 0;
             
             while (dataRecords.Skip(pos).Any())
@@ -30,6 +31,7 @@ namespace AppKataCsvViewer
 
                 pos += pageSize;
             }
+            return pages;
         }
 
         private Page CreatePageOf(List<DataRecord> dataRecords)
