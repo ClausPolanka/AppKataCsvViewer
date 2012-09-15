@@ -13,13 +13,14 @@ namespace AppKataCsvViewer
         public Table(List<DataRecord> dataRecords, int pageSize)
         {
             this.pageSize = pageSize;
-            this.Header = dataRecords[INDEX_OF_HEADER];
-            this.pages = ToPages(new List<DataRecord>(dataRecords));
+            var recordsCopy = new List<DataRecord>(dataRecords);
+            this.Header = recordsCopy[INDEX_OF_HEADER];
+            recordsCopy.RemoveAt(INDEX_OF_HEADER);
+            this.pages = ToPages(recordsCopy);
         }
 
         private List<Page> ToPages(List<DataRecord> dataRecords)
         {
-            dataRecords.RemoveAt(INDEX_OF_HEADER);
             List<Page> pages = new List<Page>();
             int pos = 0;
             
