@@ -49,12 +49,6 @@
     <Compile Include="ReadFromStandardInTest.cs" />
     <Compile Include="RedirectStandardInSpike.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AppKataCsvViewerTests\AppKataCsvViewerEndToEndTests.csproj">
-      <Project>{622DF3F4-64EC-46AE-ADCC-252DAE083E12}</Project>
-      <Name>AppKataCsvViewerEndToEndTests</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
