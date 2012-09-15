@@ -5,21 +5,19 @@ namespace AppKataCsvViewer
 {
     public class Table
     {
-        private readonly int pageSize;
         private const int INDEX_OF_HEADER = 0;
 
         private readonly List<Page> pages = new List<Page>();
 
         public Table(List<DataRecord> dataRecords, int pageSize)
         {
-            this.pageSize = pageSize;
             var recordsCopy = new List<DataRecord>(dataRecords);
             this.Header = recordsCopy[INDEX_OF_HEADER];
             recordsCopy.RemoveAt(INDEX_OF_HEADER);
-            this.pages = ToPages(recordsCopy);
+            this.pages = ToPages(recordsCopy, pageSize);
         }
 
-        private List<Page> ToPages(List<DataRecord> dataRecords)
+        private List<Page> ToPages(List<DataRecord> dataRecords, int pageSize)
         {
             List<Page> pages = new List<Page>();
             int pos = 0;
@@ -28,14 +26,14 @@ namespace AppKataCsvViewer
             {
                 List<DataRecord> tmpRecords = dataRecords.Skip(pos).ToList();
 
-                pages.Add(CreatePageOf(tmpRecords));
+                pages.Add(CreatePageOf(tmpRecords, pageSize));
 
                 pos += pageSize;
             }
             return pages;
         }
 
-        private Page CreatePageOf(List<DataRecord> dataRecords)
+        private Page CreatePageOf(List<DataRecord> dataRecords, int pageSize)
         {
             var page = new Page();
             page.Add(Header);
