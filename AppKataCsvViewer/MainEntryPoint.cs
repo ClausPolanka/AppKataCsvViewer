@@ -2,26 +2,27 @@
 
 namespace AppKataCsvViewer
 {
-    public class MainEntryPoint
+    public class 
+        MainEntryPoint
     {
         // Public for testing purposes.
-        public static CommandReaderListener commandReaderListener = new CommandReaderListenerNullObject();
+        public static UserCommandReceiverListener userCommandReceiverListener = new UserCommandReceiverListenerNullObject();
         
         private const int FILE_NAME = 0;
 
         public static void Main(string[] args)
         {
-            List<DataRecord> dataRecords = new FileCsvContentLoader().LoadDataRecords(args[FILE_NAME]);
+            List<DataRecord> dataRecords = new CsvFileConverter().ToDataRecords(args[FILE_NAME]);
 
-            var table = new Table(dataRecords, pageSize: 3);
+            var table = new Table(dataRecords, defaultPageSize: 3);
 
-            var csvViewer = new CsvViewer(new ConsoleCommandReader(commandReaderListener), new ConsoleDisplay());
+            var csvViewer = new CsvViewer(new ConsoleUserUserCommandReceiver(userCommandReceiverListener), new ConsoleDisplay());
             
             csvViewer.Show(table);
         }
     }
 
-    public class CommandReaderListenerNullObject : CommandReaderListener
+    public class UserCommandReceiverListenerNullObject : UserCommandReceiverListener
     {
         public void NotifyNewCommand()
         {
