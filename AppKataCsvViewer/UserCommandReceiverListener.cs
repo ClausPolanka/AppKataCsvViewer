@@ -1,6 +1,6 @@
 namespace AppKataCsvViewer
 {
-    public interface CommandReaderListener
+    public interface UserCommandReceiverListener
     {
         void NotifyNewCommand();
     }
