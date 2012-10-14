@@ -3,11 +3,11 @@ using System.IO;
 
 namespace AppKataCsvViewer
 {
-    public class FileCsvContentLoader
+    public class CsvFileConverter
     {
         private const char LINE_SEPARATOR = ';';
 
-        public List<DataRecord> LoadDataRecords(string csvFileName)
+        public List<DataRecord> ToDataRecords(string csvFileName)
         {
             List<DataRecord> records = new List<DataRecord>();
 
