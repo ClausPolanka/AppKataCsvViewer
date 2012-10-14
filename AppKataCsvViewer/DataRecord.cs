@@ -4,15 +4,15 @@ namespace AppKataCsvViewer
 {
     public class DataRecord
     {
-        private readonly List<string> words = new List<string>();
+        private readonly List<string> fields = new List<string>();
 
         public void Add(string word)
         {
-            words.Add(word);
+            fields.Add(word);
         }
 
-        public int ColumnCount { get { return words.Count; } }
-        public List<string> Words { get { return words; } }
+        public int ColumnCount { get { return fields.Count; } }
+        public List<string> Fields { get { return fields; } }
 
         public override bool Equals(object obj)
         {
@@ -23,7 +23,7 @@ namespace AppKataCsvViewer
         {
             string dataRecord = string.Empty;
 
-            foreach (var w in Words)
+            foreach (var w in Fields)
                 dataRecord += w + " ";
 
             return dataRecord;
