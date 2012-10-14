@@ -5,11 +5,11 @@ namespace AppKataCsvViewer
     public class CsvViewer
     {
         private readonly Display display;
-        private readonly CommandReader commandReader;
+        private readonly UserCommandReceiver userCommandReceiver;
 
-        public CsvViewer(CommandReader commandReader, Display display)
+        public CsvViewer(UserCommandReceiver userCommandReceiver, Display display)
         {
-            this.commandReader = commandReader;
+            this.userCommandReceiver = userCommandReceiver;
             this.display = display;
         }
 
@@ -23,7 +23,7 @@ namespace AppKataCsvViewer
         {
             string command;
 
-            while ( ! string.IsNullOrEmpty(command = commandReader.ReadCommand()))
+            while ( ! string.IsNullOrEmpty(command = userCommandReceiver.ReceiveUserCommand()))
             {
                 if (command.ToLower() == "x" || command.ToLower() == "exit")
                 {

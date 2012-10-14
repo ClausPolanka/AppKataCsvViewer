@@ -22,6 +22,7 @@ namespace AppKataCsvViewer
         {
             Page page = table.Pages[pageNumber++];
 
+            // TODO Move methods to Page class (Feature Envy).
             PrintHeaderFor(page);
             PrintDataRecordsFor(page);
             PrintUserOptionsFor(table.Pages);
@@ -38,6 +39,7 @@ namespace AppKataCsvViewer
             PrintHeaderLine(page.MaxColumnLengths());
         }
 
+        // Move responsibility to a White-Space Calculator (SRP).
         private string WhiteSpacesFor(string word, int maxColumnLength)
         {
             if (word.Length == maxColumnLength)

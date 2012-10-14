@@ -6,7 +6,7 @@ using AppKataCsvViewer;
 
 namespace AppKataCsvViewerEndToEndTests
 {
-    public class ApplicationTestExecutor : CommandReaderListener
+    public class ApplicationTestExecutor : UserCommandReceiverListener
     {
         private readonly StringWriter consoleOutput;
         private Thread thread;
@@ -18,7 +18,7 @@ namespace AppKataCsvViewerEndToEndTests
 
         public void ExecuteViewerFor(string csvFileName)
         {
-            MainEntryPoint.commandReaderListener = this;
+            MainEntryPoint.userCommandReceiverListener = this;
             thread = new Thread(ExecuteCsvViewer);
             thread.Start(csvFileName);
             thread.Join(100);
