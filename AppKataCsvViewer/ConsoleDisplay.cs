@@ -5,16 +5,11 @@ namespace AppKataCsvViewer
 {
     public class ConsoleDisplay : Display
     {
-        private const int INDEX_OF_HEADER = 0;
         private const int INDEX_OF_FIRST_RECORD = 1;
-
         private const string EXIT_COMMAND = "eX(it";
         private const string ALL_USER_OPTIONS = "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
-
         private const string WHITE_SPACE = " ";
         private const string COLUMN_SEPARATOR = "|";
-        private const string COLUMN_ROW_SEPARATOR = "+";
-        private const string ROW_SEPERATOR_CHARACTER = "-";
 
         private int pageNumber;
 
@@ -22,25 +17,16 @@ namespace AppKataCsvViewer
         {
             Page page = table.Pages[pageNumber++];
 
-            // TODO Move methods to Page class (Feature Envy).
-            PrintHeaderFor(page);
+            Console.Out.Write(page.Header());
+        
+            // TODO Move method to Page class (Feature Envy).
             PrintDataRecordsFor(page);
+            
             PrintUserOptionsFor(table.Pages);
         }
 
-        private void PrintHeaderFor(Page page)
-        {
-            List<string> headerColumns = page.DataRecords[INDEX_OF_HEADER].Words;
-
-            for (int i = 0; i < headerColumns.Count; i++)
-                Console.Out.Write(
-                    headerColumns[i] + WhiteSpacesFor(headerColumns[i], page.MaxColumnLengths()[i]) + COLUMN_SEPARATOR);
-
-            PrintHeaderLine(page.MaxColumnLengths());
-        }
-
         // Move responsibility to a White-Space Calculator (SRP).
-        private string WhiteSpacesFor(string word, int maxColumnLength)
+        public static string WhiteSpacesFor(string word, int maxColumnLength)
         {
             if (word.Length == maxColumnLength)
                 return string.Empty;
@@ -51,19 +37,6 @@ namespace AppKataCsvViewer
                 spaces += WHITE_SPACE;
 
             return spaces;
-        }
-
-        private void PrintHeaderLine(IEnumerable<int> maxColumnLengths)
-        {
-            Console.WriteLine();
-
-            foreach (int maxColumnLength in maxColumnLengths)
-            {
-                for (int i = 0; i < maxColumnLength; i++)
-                    Console.Out.Write(ROW_SEPERATOR_CHARACTER);
-
-                Console.Out.Write(COLUMN_ROW_SEPARATOR);
-            }
         }
 
         private void PrintDataRecordsFor(Page page)
