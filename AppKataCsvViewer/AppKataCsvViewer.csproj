@@ -43,14 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandReader.cs" />
-    <Compile Include="CommandReaderListener.cs" />
-    <Compile Include="ConsoleCommandReader.cs" />
+    <Compile Include="UserCommandReceiver.cs" />
+    <Compile Include="UserCommandReceiverListener.cs" />
+    <Compile Include="ConsoleUserUserCommandReceiver.cs" />
     <Compile Include="ConsoleDisplay.cs" />
     <Compile Include="CsvViewer.cs" />
     <Compile Include="DataRecord.cs" />
     <Compile Include="Display.cs" />
-    <Compile Include="FileCsvContentLoader.cs" />
+    <Compile Include="CsvFileConverter.cs" />
     <Compile Include="MainEntryPoint.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
