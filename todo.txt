@@ -10,17 +10,14 @@ Should I use a Mocking Framework for the Integration tests?
 
 If there is only data for a single page what options should be displayed?
 
-
 Tasks:
 
-CsvViewerEndToEndTest
-
-> Improve Unit Test Coverage
+Add tests for pages.
 
 Protocol:
 
-Tasks                                                      Date          Pomodoro 
-Project Setup                                              04.09.2012    1  
+Tasks                                                                                           Date          Pomodoro 
+Project Setup                                                                                   04.09.2012    1  
 ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits        04.09.2012    1 
 ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits        05.09.2012    2
 ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits        06.09.2012    4
@@ -28,7 +25,8 @@ ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvData
 ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits        07.09.2012    4
 ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsOnePageForGivenCsvDataAndExits        08.09.2012    6
 ForADefaultPageSizeOf3AndUserEntersExitCommand_ViewerShowsFirstPageForGivenCsvDataAndExits      09.09.2012    2
-Restructured Code, Extracted Domain Concepts e.g. Table, Page, DataRecord                       10.09.2012    7
-PageTableTest and new End-To-End test                                                           14.09.2012    3
-Small code improvements (e.g. renaming, moving)                                                 15.09.2012    1
-Implemented End-To-End-Tests for Next command. Separated Unit from EtE-Tests                    15.09.2012    2
+Restructured Code, Extracted Domain Concepts e.g. Table, Page, DataRecord.                      10.09.2012    7
+PageTableTest and new End-To-End test.                                                          14.09.2012    3
+Small code improvements (e.g. renaming, moving).                                                15.09.2012    1
+Implemented End-To-End-Tests for Next command. Separated Unit from EtE-Tests.                   15.09.2012    2
+Code review, Re-evaluated design and refactored towards new design decisions.                   14.10.2012    6
