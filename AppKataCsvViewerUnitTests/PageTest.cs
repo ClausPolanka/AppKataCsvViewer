@@ -24,7 +24,7 @@ namespace AppKataCsvViewerUnitTests
         }
 
         [Test]
-        public void GetDataRecords_GivenOneDataRecordWithThreeFields_ReturnsDataRecordsCorrectlyFormatted()
+        public void DataRecords_GivenOneDataRecordWithThreeFields_ReturnsDataRecordsCorrectlyFormatted()
         {
             var headerRecord = new DataRecord();
             headerRecord.Add("headerColumn_1");
