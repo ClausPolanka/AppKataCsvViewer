@@ -15,7 +15,7 @@ namespace AppKataCsvViewer
             Page page = table.Pages[pageNumber++];
 
             Console.Out.Write(page.Header());
-            Console.Out.Write(page.GetDataRecords());
+            Console.Out.Write(page.DataRecords());
             
             PrintUserOptionsFor(table.Pages);
         }

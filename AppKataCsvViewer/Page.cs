@@ -40,10 +40,10 @@ namespace AppKataCsvViewer
 
         private List<string> HeaderFields()
         {
-            return DataRecords[INDEX_OF_HEADER].Fields;
+            return dataRecords[INDEX_OF_HEADER].Fields;
         }
 
-        public int[] MaxColumnLengths()
+        private int[] MaxColumnLengths()
         {
             int columnCount = dataRecords[INDEX_OF_HEADER].ColumnCount;
 
@@ -89,7 +89,7 @@ namespace AppKataCsvViewer
             return headerLine;
         }
 
-        public string GetDataRecords()
+        public string DataRecords()
         {
             string records = NEW_LINE;
             records += Records();
@@ -100,15 +100,13 @@ namespace AppKataCsvViewer
         {
             string records = String.Empty;
 
-            List<DataRecord> dataRecords = DataRecords;
-
             for (int recordIndex = INDEX_OF_FIRST_RECORD; recordIndex < dataRecords.Count; recordIndex++)
-                records += PrintDataRecord(recordIndex, dataRecords);
+                records += RecordFor(recordIndex);
 
             return records;
         }
 
-        private string PrintDataRecord(int recordIndex, List<DataRecord> dataRecords)
+        private string RecordFor(int recordIndex)
         {
             string record = String.Empty;
 
@@ -122,8 +120,6 @@ namespace AppKataCsvViewer
 
             return record;
         }
-
-        public List<DataRecord> DataRecords { get { return dataRecords; } }
 
         public override bool Equals(object obj)
         {
