@@ -7,40 +7,40 @@ namespace AppKataCsvViewerUnitTests
     public class PageTest
     {
         [Test]
-        public void Header_GivenDataRecordWithThreeFields_CreateHeader()
+        public void Header_GivenDataRecordWithThreeFields_ReturnsCorrectlyFormattedHeader()
         {
             var dataRecord = new DataRecord();
-            dataRecord.Add("headerColumn_1");
-            dataRecord.Add("headerColumn_2");
-            dataRecord.Add("headerColumn_3");
+            dataRecord.Add("headerField_1");
+            dataRecord.Add("headerField_2");
+            dataRecord.Add("headerField_3");
 
             var sut = new Page();
             sut.Add(dataRecord);
 
-            var expectedHeader = "headerColumn_1|headerColumn_2|headerColumn_3|\n" +
-                                 "--------------+--------------+--------------+";
+            var expectedHeader = "headerField_1|headerField_2|headerField_3|\n" +
+                                 "-------------+-------------+-------------+";
 
             Assert.That(sut.Header(), Is.EqualTo(expectedHeader), "page header");
         }
 
         [Test]
-        public void DataRecords_GivenOneDataRecordWithThreeFields_ReturnsDataRecordsCorrectlyFormatted()
+        public void DataRecords_GivenTwoDataRecordsEachContainingThreeFields_ReturnsCorrectlyFormattedDataRecords()
         {
             var headerRecord = new DataRecord();
-            headerRecord.Add("headerColumn_1");
-            headerRecord.Add("headerColumn_2");
-            headerRecord.Add("headerColumn_3");
+            headerRecord.Add("headerField_1");
+            headerRecord.Add("headerField_2");
+            headerRecord.Add("headerField_3");
 
             var dataRecord = new DataRecord();
-            dataRecord.Add("value_1");
-            dataRecord.Add("value_2");
-            dataRecord.Add("value_3");
+            dataRecord.Add("field_1");
+            dataRecord.Add("field_2");
+            dataRecord.Add("field_3");
 
             var sut = new Page();
             sut.Add(headerRecord);
             sut.Add(dataRecord);
 
-            var expectedDataRecords = "\nvalue_1       |value_2       |value_3       |\n";
+            var expectedDataRecords = "\nfield_1      |field_2      |field_3      |\n";
 
             Assert.That(sut.DataRecords, Is.EqualTo(expectedDataRecords), "page data records");
         }
