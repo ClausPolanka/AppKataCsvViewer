@@ -10,7 +10,8 @@ namespace AppKataCsvViewerUnitTests
         [TestCase(10, 4, 3)]
         [TestCase(4, 3, 2)]
         [TestCase(1, 2, 1)]
-        public void Create_GivenDataRecordCountAndPageSize_PageCountAndHeaderWillBeSet(int dataRecordCount, int pageSize, int expectedPageCount)
+        public void Create_GivenDataRecordCountAndPageSize_PageCountAndHeaderWillBeSet(int dataRecordCount, int pageSize,
+                                                                                       int expectedPageCount)
         {
             DataRecord header = new DataRecord();
 
@@ -28,132 +29,53 @@ namespace AppKataCsvViewerUnitTests
         [Test]
         public void Create_GivenDataRecords_InitializePages()
         {
-            List<DataRecord> dataRecords = new List<DataRecord>();
-            dataRecords.Add(Header());
-            dataRecords.Add(FirstPageRecord1());
-            dataRecords.Add(FirstPageRecord2());
-            dataRecords.Add(FirstPageRecord3());
-            dataRecords.Add(SecondPageRecord1());
-            dataRecords.Add(SecondPageRecord2());
-            dataRecords.Add(SecondPageRecord3());
-            dataRecords.Add(LastPageRecord());
+            List<DataRecord> dataRecords = new List<DataRecord> { RecordFor(field: "header") };
+
+            for (int i = 1; i <= 6; i++)
+                dataRecords.Add(RecordFor(i));
+
+            dataRecords.Add(RecordFor(field: "lastPage"));
 
             var sut = new Table(dataRecords, defaultPageSize: 3);
 
             Assert.That(sut.PageCount, Is.EqualTo(3), "table page count");
-            Assert.That(sut.Header, Is.EqualTo(ExpectedHeader()), "table page header");
-            Assert.That(sut.Pages[0], Is.EqualTo(ExpectedFirstPage()), "table first page");
-            Assert.That(sut.Pages[1], Is.EqualTo(ExpectedSecondPage()), "table second page");
-            Assert.That(sut.Pages[2], Is.EqualTo(ExpectedLastPage()), "table last page");
+            Assert.That(sut.Header, Is.EqualTo(RecordFor(field: "header")), "table's page header");
+            Assert.That(sut.Pages[0], Is.EqualTo(PageContainsRecords(@from: 1, to: 3)), "table's first page");
+            Assert.That(sut.Pages[1], Is.EqualTo(PageContainsRecords(@from: 4, to: 6)), "table's second page");
+            Assert.That(sut.Pages[2], Is.EqualTo(ExpectedLastPage()), "table's last page");
         }
 
-        private static DataRecord Header()
+        private static DataRecord RecordFor(int index = 0, string field = "field")
         {
-            var header = new DataRecord();
-            header.Add("Name");
-            header.Add("Age");
-            header.Add("City");
-            return header;
+            var record = new DataRecord();
+            record.Add(field + index);
+            record.Add(field + index);
+            record.Add(field + index);
+            return record;
         }
-
-        private static DataRecord FirstPageRecord1()
+        
+        private static Page PageContainsRecords(int @from, int to)
         {
-            var firstPageRecord1 = new DataRecord();
-            firstPageRecord1.Add("Peter");
-            firstPageRecord1.Add("42");
-            firstPageRecord1.Add("New York");
-            return firstPageRecord1;
-        }
+            var page = CreatePage();
+            page.Add(RecordFor(field: "header"));
+            
+            for (int i = @from; i <= to; i++)
+                page.Add(RecordFor(i));
 
-        private static DataRecord FirstPageRecord2()
-        {
-            var firstPageRecord2 = new DataRecord();
-            firstPageRecord2.Add("Paul");
-            firstPageRecord2.Add("57");
-            firstPageRecord2.Add("London");
-            return firstPageRecord2;
-        }
-
-        private static DataRecord FirstPageRecord3()
-        {
-            var firstPageRecord3 = new DataRecord();
-            firstPageRecord3.Add("Mary");
-            firstPageRecord3.Add("35");
-            firstPageRecord3.Add("Munich");
-            return firstPageRecord3;
-        }
-
-        private static DataRecord SecondPageRecord1()
-        {
-            var secondPageRecord1 = new DataRecord();
-            secondPageRecord1.Add("Jaques");
-            secondPageRecord1.Add("66");
-            secondPageRecord1.Add("Paris");
-            return secondPageRecord1;
-        }
-
-        private static DataRecord SecondPageRecord2()
-        {
-            var secondPageRecord2 = new DataRecord();
-            secondPageRecord2.Add("Yuri");
-            secondPageRecord2.Add("23");
-            secondPageRecord2.Add("Moscow");
-            return secondPageRecord2;
-        }
-
-        private static DataRecord SecondPageRecord3()
-        {
-            var secondPageRecord3 = new DataRecord();
-            secondPageRecord3.Add("Stephanie");
-            secondPageRecord3.Add("47");
-            secondPageRecord3.Add("Stockholm");
-            return secondPageRecord3;
-        }
-
-        private static DataRecord LastPageRecord()
-        {
-            var lastPageRecord = new DataRecord();
-            lastPageRecord.Add("Nadia");
-            lastPageRecord.Add("29");
-            lastPageRecord.Add("Madrid");
-            return lastPageRecord;
-        }
-
-        private static DataRecord ExpectedHeader()
-        {
-            var expectedHeader = new DataRecord();
-            expectedHeader.Add("Name");
-            expectedHeader.Add("Age");
-            expectedHeader.Add("City");
-            return expectedHeader;
-        }
-
-        private static Page ExpectedFirstPage()
-        {
-            var expectedFirstPage = new Page(new PageConsoleFormatter());
-            expectedFirstPage.Add(Header());
-            expectedFirstPage.Add(FirstPageRecord1());
-            expectedFirstPage.Add(FirstPageRecord2());
-            expectedFirstPage.Add(FirstPageRecord3());
-            return expectedFirstPage;
-        }
-
-        private static Page ExpectedSecondPage()
-        {
-            var expectedSecondPage = new Page(new PageConsoleFormatter());
-            expectedSecondPage.Add(Header());
-            expectedSecondPage.Add(SecondPageRecord1());
-            expectedSecondPage.Add(SecondPageRecord2());
-            expectedSecondPage.Add(SecondPageRecord3());
-            return expectedSecondPage;
+            return page;
         }
 
         private static Page ExpectedLastPage()
         {
-            var expectedLastPage = new Page(new PageConsoleFormatter());
-            expectedLastPage.Add(Header());
-            expectedLastPage.Add(LastPageRecord());
-            return expectedLastPage;
+            var page = CreatePage();
+            page.Add(RecordFor(field: "header"));
+            page.Add(RecordFor(field: "lastPage"));
+            return page;
+        }
+
+        private static Page CreatePage()
+        {
+            return new Page(new PageConsoleFormatter(new MaxConsoleColumnLengthsIdentifier()));
         }
     }
 }
