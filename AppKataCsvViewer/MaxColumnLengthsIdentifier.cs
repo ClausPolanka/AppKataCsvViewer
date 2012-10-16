@@ -4,24 +4,27 @@ namespace AppKataCsvViewer
 {
     public class MaxColumnLengthsIdentifier
     {
-        private const int HEADER_INDEX = 0;
+        private const int ANY_RECORD = 0;
 
         public int[] MaxColumnLengthsOf(List<DataRecord> dataRecords)
         {
-            int columnCount = dataRecords[HEADER_INDEX].ColumnCount;
+            int columnCount = dataRecords[ANY_RECORD].ColumnCount;
 
             int[] maxLengths = new int[columnCount];
 
             foreach (DataRecord record in dataRecords)
-            {
-                for (int columnIndex = 0; columnIndex < record.ColumnCount; columnIndex++)
-                {
-                    if (maxLengths[columnIndex] < record.Fields[columnIndex].Length)
-                        maxLengths[columnIndex] = record.Fields[columnIndex].Length;
-                }
-            }
+                CalculateMaximum(maxLengths, record);
 
             return maxLengths;
+        }
+
+        private void CalculateMaximum(int[] maxLengths, DataRecord record)
+        {
+            for (int col = 0; col < record.ColumnCount; col++)
+            {
+                if (maxLengths[col] < record.Fields[col].Length)
+                    maxLengths[col] = record.Fields[col].Length;
+            }
         }
     }
 }
