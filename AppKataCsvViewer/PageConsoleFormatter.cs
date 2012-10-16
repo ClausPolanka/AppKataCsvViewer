@@ -10,7 +10,7 @@ namespace AppKataCsvViewer
         private const string COLUMN_SEPARATOR = "|";
         private const string WHITE_SPACE = " ";
         private const string NEW_LINE = "\n";
-        private const int INDEX_OF_HEADER = 0;
+        private const int HEADER_INDEX = 0;
         private const int INDEX_OF_FIRST_RECORD = 1;
 
         public string HeaderFor(List<DataRecord> dataRecords)
@@ -23,7 +23,7 @@ namespace AppKataCsvViewer
         private string HeaderLine(List<DataRecord> dataRecords)
         {
             string headerLine = String.Empty;
-            List<string> headerFields = dataRecords[INDEX_OF_HEADER].Fields;
+            List<string> headerFields = dataRecords[HEADER_INDEX].Fields;
 
             for (int i = 0; i < headerFields.Count; i++)
                 headerLine += headerFields[i] + WhiteSpacesFor(headerFields[i], MaxColumnLengths(dataRecords)[i]) + COLUMN_SEPARATOR;
@@ -44,22 +44,9 @@ namespace AppKataCsvViewer
             return spaces;
         }
 
-        public static int[] MaxColumnLengths(List<DataRecord> dataRecords)
+        private int[] MaxColumnLengths(List<DataRecord> dataRecords)
         {
-            int columnCount = dataRecords[INDEX_OF_HEADER].ColumnCount;
-
-            int[] maxLengths = new int[columnCount];
-
-            foreach (DataRecord record in dataRecords)
-            {
-                for (int columnIndex = 0; columnIndex < record.ColumnCount; columnIndex++)
-                {
-                    if (maxLengths[columnIndex] < record.Fields[columnIndex].Length)
-                        maxLengths[columnIndex] = record.Fields[columnIndex].Length;
-                }
-            }
-
-            return maxLengths;
+            return new MaxColumnLengthsIdentifier().MaxColumnLengthsOf(dataRecords);
         }
 
         private string HeaderLowerBorderLine(List<DataRecord> dataRecords)

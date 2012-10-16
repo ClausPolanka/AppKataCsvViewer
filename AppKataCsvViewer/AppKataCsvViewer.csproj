@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MaxColumnLengthsIdentifier.cs" />
     <Compile Include="PageConsoleFormatter.cs" />
     <Compile Include="PageFormatter.cs" />
     <Compile Include="UserCommandReceiver.cs" />
