@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace AppKataCsvViewer
 {
-    public class MaxColumnLengthsIdentifier
+    public class MaxConsoleColumnLengthsIdentifier : MaxConsoleLengthsIdentifier
     {
         private const int ANY_RECORD = 0;
 

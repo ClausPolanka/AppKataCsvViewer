@@ -14,7 +14,7 @@ namespace AppKataCsvViewerUnitTests
             dataRecord.Add("headerField_2");
             dataRecord.Add("headerField_3");
 
-            var sut = new Page(new PageConsoleFormatter());
+            var sut = CreatePage();
             sut.Add(dataRecord);
 
             var expectedHeader = "headerField_1|headerField_2|headerField_3|\n" +
@@ -36,7 +36,7 @@ namespace AppKataCsvViewerUnitTests
             dataRecord.Add("field_2");
             dataRecord.Add("field_3");
 
-            var sut = new Page(new PageConsoleFormatter());
+            var sut = CreatePage();
             sut.Add(headerRecord);
             sut.Add(dataRecord);
 
@@ -51,14 +51,18 @@ namespace AppKataCsvViewerUnitTests
             var dataRecord = new DataRecord();
             dataRecord.Add("Field");
 
-            var page1 = new Page(new PageConsoleFormatter());
+            var page1 = CreatePage();
             page1.Add(dataRecord);
 
-            var page2 = new Page(new PageConsoleFormatter());
+            var page2 = CreatePage();
             page2.Add(dataRecord);
 
             Assert.That(page1, Is.EqualTo(page2), "pages must be equal");
         }
 
+        private static Page CreatePage()
+        {
+            return new Page(new PageConsoleFormatter(new MaxConsoleColumnLengthsIdentifier()));
+        }
     }
 }

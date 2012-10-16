@@ -12,6 +12,13 @@ namespace AppKataCsvViewer
         private const string NEW_LINE = "\n";
         private const int HEADER_INDEX = 0;
         private const int INDEX_OF_FIRST_RECORD = 1;
+        
+        private readonly MaxConsoleLengthsIdentifier maxConsoleColumnLengthsIdentifier;
+
+        public PageConsoleFormatter(MaxConsoleLengthsIdentifier maxConsoleColumnLengthsIdentifier)
+        {
+            this.maxConsoleColumnLengthsIdentifier = maxConsoleColumnLengthsIdentifier;
+        }
 
         public string HeaderFor(List<DataRecord> dataRecords)
         {
@@ -46,16 +53,16 @@ namespace AppKataCsvViewer
 
         private int[] MaxColumnLengths(List<DataRecord> dataRecords)
         {
-            return new MaxColumnLengthsIdentifier().MaxColumnLengthsOf(dataRecords);
+            return maxConsoleColumnLengthsIdentifier.MaxColumnLengthsOf(dataRecords);
         }
 
         private string HeaderLowerBorderLine(List<DataRecord> dataRecords)
         {
             string headerLine = NEW_LINE;
 
-            foreach (int maxColumnLength in MaxColumnLengths(dataRecords))
+            foreach (int max in MaxColumnLengths(dataRecords))
             {
-                for (int i = 0; i < maxColumnLength; i++)
+                for (int i = 0; i < max; i++)
                     headerLine += ROW_SEPERATOR_CHARACTER;
 
                 headerLine += COLUMN_ROW_SEPARATOR;
@@ -85,10 +92,10 @@ namespace AppKataCsvViewer
         {
             string record = String.Empty;
 
-            for (int wordIndex = 0; wordIndex < dataRecords[recordIndex].ColumnCount; wordIndex++)
+            for (int fieldIndex = 0; fieldIndex < dataRecords[recordIndex].ColumnCount; fieldIndex++)
             {
-                string word = dataRecords[recordIndex].Fields[wordIndex];
-                record += word + WhiteSpacesFor(word, MaxColumnLengths(dataRecords)[wordIndex]) + COLUMN_SEPARATOR;
+                string field = dataRecords[recordIndex].Fields[fieldIndex];
+                record += field + WhiteSpacesFor(field, MaxColumnLengths(dataRecords)[fieldIndex]) + COLUMN_SEPARATOR;
             }
 
             record += NEW_LINE;

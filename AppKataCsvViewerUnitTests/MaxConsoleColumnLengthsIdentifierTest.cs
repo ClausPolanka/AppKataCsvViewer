@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace AppKataCsvViewerUnitTests
 {
     [TestFixture]
-    public class MaxColumnLengthsIdentifierTest
+    public class MaxConsoleColumnLengthsIdentifierTest
     {
         [Test]
         public void MaxColumnLengthsFor_GivenOneDataRecordContainingOneField_ReturnsFieldLengthAsMaxColumnLength()
@@ -15,7 +15,7 @@ namespace AppKataCsvViewerUnitTests
 
             List<DataRecord> dataRecords = new List<DataRecord> { dataRecord };
 
-            var sut = new MaxColumnLengthsIdentifier();
+            var sut = new MaxConsoleColumnLengthsIdentifier();
 
             Assert.That(sut.MaxColumnLengthsOf(dataRecords), Is.EqualTo(new[] { "field".Length }), "max column lengths");
         }
@@ -29,7 +29,7 @@ namespace AppKataCsvViewerUnitTests
 
             List<DataRecord> dataRecords = new List<DataRecord> { dataRecord };
 
-            var sut = new MaxColumnLengthsIdentifier();
+            var sut = new MaxConsoleColumnLengthsIdentifier();
 
             var expectedMaxLengths = new[] { "field".Length, "fieldxxx".Length };
             
@@ -47,7 +47,7 @@ namespace AppKataCsvViewerUnitTests
 
             List<DataRecord> dataRecords = new List<DataRecord> { dataRecord1, dataRecord2 };
 
-            var sut = new MaxColumnLengthsIdentifier();
+            var sut = new MaxConsoleColumnLengthsIdentifier();
 
             var expectedMaxLengths = new[] { "fieldxxx".Length };
             
@@ -67,7 +67,7 @@ namespace AppKataCsvViewerUnitTests
 
             List<DataRecord> dataRecords = new List<DataRecord> { dataRecord1, dataRecord2 };
 
-            var sut = new MaxColumnLengthsIdentifier();
+            var sut = new MaxConsoleColumnLengthsIdentifier();
 
             var expectedMaxLengths = new[] { "field_01_xxx".Length, "field_02_xxx".Length };
             
