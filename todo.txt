@@ -12,7 +12,7 @@ If there is only data for a single page what options should be displayed?
 
 Tasks:
 
-Add tests for pages.
+Implement prev command.
 
 Protocol:
 
@@ -30,3 +30,5 @@ PageTableTest and new End-To-End test.                                          
 Small code improvements (e.g. renaming, moving).                                                15.09.2012    1
 Implemented End-To-End-Tests for Next command. Separated Unit from EtE-Tests.                   15.09.2012    2
 Code review, Re-evaluated design and refactored towards new design decisions.                   14.10.2012    6
+Code review, Re-evaluated design and refactored towards new design decisions.                   15.10.2012    2
+Code review, Re-evaluated design and refactored towards new design decisions.                   16.10.2012    4
