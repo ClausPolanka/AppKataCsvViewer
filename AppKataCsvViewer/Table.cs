@@ -35,7 +35,7 @@ namespace AppKataCsvViewer
 
         private Page CreatePageOf(List<DataRecord> dataRecords, int pageSize)
         {
-            var page = new Page();
+            var page = new Page(new PageConsoleFormatter());
             page.Add(Header);
 
             foreach (DataRecord dataRecord in dataRecords.Take(pageSize))

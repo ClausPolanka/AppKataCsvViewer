@@ -130,7 +130,7 @@ namespace AppKataCsvViewerUnitTests
 
         private static Page ExpectedFirstPage()
         {
-            var expectedFirstPage = new Page();
+            var expectedFirstPage = new Page(new PageConsoleFormatter());
             expectedFirstPage.Add(Header());
             expectedFirstPage.Add(FirstPageRecord1());
             expectedFirstPage.Add(FirstPageRecord2());
@@ -140,7 +140,7 @@ namespace AppKataCsvViewerUnitTests
 
         private static Page ExpectedSecondPage()
         {
-            var expectedSecondPage = new Page();
+            var expectedSecondPage = new Page(new PageConsoleFormatter());
             expectedSecondPage.Add(Header());
             expectedSecondPage.Add(SecondPageRecord1());
             expectedSecondPage.Add(SecondPageRecord2());
@@ -150,7 +150,7 @@ namespace AppKataCsvViewerUnitTests
 
         private static Page ExpectedLastPage()
         {
-            var expectedLastPage = new Page();
+            var expectedLastPage = new Page(new PageConsoleFormatter());
             expectedLastPage.Add(Header());
             expectedLastPage.Add(LastPageRecord());
             return expectedLastPage;

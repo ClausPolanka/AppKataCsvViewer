@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageConsoleFormatter.cs" />
+    <Compile Include="PageFormatter.cs" />
     <Compile Include="UserCommandReceiver.cs" />
     <Compile Include="UserCommandReceiverListener.cs" />
     <Compile Include="ConsoleUserUserCommandReceiver.cs" />

@@ -5,15 +5,15 @@ namespace AppKataCsvViewer
 {
     public class Page
     {
-        private const int INDEX_OF_HEADER = 0;
-        private const int INDEX_OF_FIRST_RECORD = 1;
-        private const string COLUMN_SEPARATOR = "|";
-        private const string COLUMN_ROW_SEPARATOR = "+";
-        private const string ROW_SEPERATOR_CHARACTER = "-";
         private const string WHITE_SPACE = " ";
-        private const string NEW_LINE = "\n";
 
         private readonly List<DataRecord> dataRecords = new List<DataRecord>();
+        private PageFormatter pageFormatter;
+
+        public Page(PageFormatter pageFormatter)
+        {
+            this.pageFormatter = pageFormatter;
+        }
 
         public void Add(DataRecord dataRecord)
         {
@@ -22,104 +22,13 @@ namespace AppKataCsvViewer
 
         public string Header()
         {
-            string header = HeaderLine();
-            header += HeaderFooterLine();
-            return header;
-        }
-
-        private string HeaderLine()
-        {
-            string headerLine = String.Empty;
-            List<string> headerFields = HeaderFields();
-
-            for (int i = 0; i < headerFields.Count; i++)
-                headerLine += headerFields[i] + WhiteSpacesFor(headerFields[i], MaxColumnLengths()[i]) + COLUMN_SEPARATOR;
-
-            return headerLine;
-        }
-
-        private List<string> HeaderFields()
-        {
-            return dataRecords[INDEX_OF_HEADER].Fields;
-        }
-
-        private int[] MaxColumnLengths()
-        {
-            int columnCount = dataRecords[INDEX_OF_HEADER].ColumnCount;
-
-            int[] maxLengths = new int[columnCount];
-
-            foreach (DataRecord record in dataRecords)
-            {
-                for (int columnIndex = 0; columnIndex < record.ColumnCount; columnIndex++)
-                {
-                    if (maxLengths[columnIndex] < record.Fields[columnIndex].Length)
-                        maxLengths[columnIndex] = record.Fields[columnIndex].Length;
-                }
-            }
-
-            return maxLengths;
-        }
-
-        private string WhiteSpacesFor(string word, int maxColumnLength)
-        {
-            if (word.Length == maxColumnLength)
-                return String.Empty;
-
-            string spaces = String.Empty;
-
-            for (int i = 0; i < (maxColumnLength - word.Length); i++)
-                spaces += WHITE_SPACE;
-
-            return spaces;
-        }
-
-        private string HeaderFooterLine()
-        {
-            string headerLine = NEW_LINE;
-
-            foreach (int maxColumnLength in MaxColumnLengths())
-            {
-                for (int i = 0; i < maxColumnLength; i++)
-                    headerLine += ROW_SEPERATOR_CHARACTER;
-
-                headerLine += COLUMN_ROW_SEPARATOR;
-            }
-
-            return headerLine;
+            return pageFormatter.HeaderFor(dataRecords);
         }
 
         public string DataRecords()
         {
-            string records = NEW_LINE;
-            records += Records();
-            return records;
-        }
-
-        private string Records()
-        {
-            string records = String.Empty;
-
-            for (int recordIndex = INDEX_OF_FIRST_RECORD; recordIndex < dataRecords.Count; recordIndex++)
-                records += RecordFor(recordIndex);
-
-            return records;
-        }
-
-        private string RecordFor(int recordIndex)
-        {
-            string record = String.Empty;
-
-            for (int wordIndex = 0; wordIndex < dataRecords[recordIndex].ColumnCount; wordIndex++)
-            {
-                string word = dataRecords[recordIndex].Fields[wordIndex];
-                record += word + WhiteSpacesFor(word, MaxColumnLengths()[wordIndex]) + COLUMN_SEPARATOR;
-            }
-
-            record += NEW_LINE;
-
-            return record;
-        }
+            return pageFormatter.Formatted(dataRecords);
+        } 
 
         public override bool Equals(object obj)
         {
