@@ -2,8 +2,7 @@
 
 namespace AppKataCsvViewer
 {
-    public class 
-        MainEntryPoint
+    public class MainEntryPoint
     {
         // Public for testing purposes.
         public static UserCommandReceiverListener userCommandReceiverListener = new UserCommandReceiverListenerNullObject();
