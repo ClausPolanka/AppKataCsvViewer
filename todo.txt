@@ -12,6 +12,7 @@ If there is only data for a single page what options should be displayed?
 
 Tasks:
 
+Add Table Unit-Test
 Implement prev command.
 
 Protocol:
@@ -32,3 +33,4 @@ Implemented End-To-End-Tests for Next command. Separated Unit from EtE-Tests.   
 Code review, Re-evaluated design and refactored towards new design decisions.                   14.10.2012    6
 Code review, Re-evaluated design and refactored towards new design decisions.                   15.10.2012    2
 Code review, Re-evaluated design and refactored towards new design decisions.                   16.10.2012    4
+Added CsvTest to get more unit-test coverage                                                    18.18.2012    2
