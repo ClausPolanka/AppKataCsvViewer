@@ -5,8 +5,8 @@ namespace AppKataCsvViewer
 {
     public class ConsoleDisplay : Display
     {
-        private const string EXIT_COMMAND = "eX(it";
-        private const string ALL_USER_OPTIONS = "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
+        public const string EXIT_COMMAND = "eX(it";
+        public const string ALL_USER_COMMANDS = "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
 
         private int pageNumber;
 
@@ -31,7 +31,7 @@ namespace AppKataCsvViewer
         private void PrintAllUserOptions()
         {
             Console.Out.WriteLine();
-            Console.Out.WriteLine(ALL_USER_OPTIONS);
+            Console.Out.WriteLine(ALL_USER_COMMANDS);
         }
 
         private void PrintExitCommand()

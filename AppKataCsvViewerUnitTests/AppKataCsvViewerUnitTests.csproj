@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleDisplayTest.cs" />
     <Compile Include="CsvViewerTest.cs" />
     <Compile Include="MaxConsoleColumnLengthsIdentifierTest.cs" />
     <Compile Include="PageTest.cs" />
