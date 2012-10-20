@@ -11,17 +11,25 @@ namespace AppKataCsvViewer
         {
             List<DataRecord> records = new List<DataRecord>();
 
-            foreach (string cvsLine in File.ReadAllLines(csvFileName))
+            foreach (string csvLine in File.ReadAllLines(csvFileName))
             {
-                var record = new DataRecord();
+                if (string.IsNullOrEmpty(csvLine))
+                    break;
 
-                foreach (var word in cvsLine.Split(LINE_SEPARATOR))
-                    record.Add(word);
-
-                records.Add(record);
+                records.Add(CreateRecordFor(csvLine));
             }
 
             return records;
+        }
+
+        private DataRecord CreateRecordFor(string csvLine)
+        {
+            var record = new DataRecord();
+
+            foreach (var field in csvLine.Split(LINE_SEPARATOR))
+                record.Add(field);
+
+            return record;
         }
     }
 }
