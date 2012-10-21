@@ -9,6 +9,7 @@ namespace AppKataCsvViewer
         private const int INDEX_OF_HEADER = 0;
 
         private readonly List<Page> pages = new List<Page>();
+        private int pageNumber;
 
         public Table(List<DataRecord> dataRecords, int defaultPageSize)
         {
@@ -51,16 +52,16 @@ namespace AppKataCsvViewer
             return page;
         }
 
-        public int PageCount
+        public Page NextPage()
         {
-            get { return pages.Count; }
+            if (pageNumber == Pages.Count)
+                return Pages[0];
+
+            return Pages[pageNumber++];
         }
 
+        public int PageCount { get { return pages.Count; } }
         public DataRecord Header { get; private set; }
-
-        public List<Page> Pages
-        {
-            get { return pages; }
-        }
+        public List<Page> Pages { get { return pages; } }
     }
 }

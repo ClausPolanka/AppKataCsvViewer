@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AppKataCsvViewer;
 using NUnit.Framework;
 
@@ -11,8 +12,7 @@ namespace AppKataCsvViewerUnitTests
         [TestCase(10, 4, 3)]
         [TestCase(4, 3, 2)]
         [TestCase(1, 2, 1)]
-        public void Create_GivenDataRecordCountAndPageSize_PageCountAndHeaderWillBeSet(int dataRecordCount, int pageSize,
-                                                                                       int expectedPageCount)
+        public void Create_GivenDataRecordCountAndPageSize_PageCountAndHeaderWillBeSet(int dataRecordCount, int pageSize, int expectedPageCount)
         {
             DataRecord header = new DataRecord();
 
@@ -25,6 +25,27 @@ namespace AppKataCsvViewerUnitTests
 
             Assert.That(sut.PageCount, Is.EqualTo(expectedPageCount), "table page count");
             Assert.That(sut.Header, Is.EqualTo(header), "table header");
+        }
+
+        [Test]
+        public void NextPage_GivenDataRecordsAndPageSize_ReturnsNextPage()
+        {
+            var sut = new Table(Create10Records(), defaultPageSize: 3);
+            
+            Page nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages[0]), "table's page");
+            
+            nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages[1]), "table's page");
+            
+            nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages[2]), "table's page");
+            
+            nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages[3]), "table's page");
+            
+            nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages[0]), "table's page");
         }
 
         [Test]
@@ -52,12 +73,23 @@ namespace AppKataCsvViewerUnitTests
             Assert.Throws<Exception>(() => new Table(new List<DataRecord>(), defaultPageSize: 1), "table's data records must not be empty");
             Assert.Throws<Exception>(() => new Table(null, defaultPageSize: 1), "table's data records must not be null"); 
         }
-        
+
         [TestCase(0)]
         [TestCase(-1)]
         public void Create_GivenADefaultInvalidDefaultPage_Throws(int invalidPageSize)
         {
             Assert.Throws<Exception>(() => { new Table(DataRecords(), invalidPageSize); }, "table's default page size must be higher than 1");
+        }
+
+        private List<DataRecord> Create10Records()
+        {
+            DataRecord header = new DataRecord();
+
+            List<DataRecord> records = new List<DataRecord> { header };
+
+            for (int i = 1; i <= 10; i++)
+                records.Add(RecordFor(i));
+            return records;
         }
 
         private DataRecord RecordFor(int index = 0, string field = "field")
