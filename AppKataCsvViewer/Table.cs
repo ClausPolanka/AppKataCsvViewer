@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,6 +12,12 @@ namespace AppKataCsvViewer
 
         public Table(List<DataRecord> dataRecords, int defaultPageSize)
         {
+            if (dataRecords == null || ! dataRecords.Any())
+                throw new Exception("There must be at least one data record.");
+
+            if (defaultPageSize < 1)
+                throw new Exception("Default page size must be higher than 0.");
+
             var recordsCopy = new List<DataRecord>(dataRecords);
             this.Header = recordsCopy[INDEX_OF_HEADER];
             recordsCopy.RemoveAt(INDEX_OF_HEADER);
@@ -21,7 +28,7 @@ namespace AppKataCsvViewer
         {
             List<Page> pages = new List<Page>();
             int pos = 0;
-            
+
             while (dataRecords.Skip(pos).Any())
             {
                 List<DataRecord> tmpRecords = dataRecords.Skip(pos).ToList();
@@ -44,8 +51,16 @@ namespace AppKataCsvViewer
             return page;
         }
 
-        public int PageCount { get { return pages.Count; } }
+        public int PageCount
+        {
+            get { return pages.Count; }
+        }
+
         public DataRecord Header { get; private set; }
-        public List<Page> Pages { get { return pages; } }
+
+        public List<Page> Pages
+        {
+            get { return pages; }
+        }
     }
 }

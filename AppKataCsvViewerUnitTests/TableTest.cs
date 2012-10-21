@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AppKataCsvViewer;
 using NUnit.Framework;
 
@@ -45,7 +46,21 @@ namespace AppKataCsvViewerUnitTests
             Assert.That(sut.Pages[2], Is.EqualTo(ExpectedLastPage()), "table's last page");
         }
 
-        private static DataRecord RecordFor(int index = 0, string field = "field")
+        [Test]
+        public void Create_GivenNoRecords_Throws()
+        {
+            Assert.Throws<Exception>(() => new Table(new List<DataRecord>(), defaultPageSize: 1), "table's data records must not be empty");
+            Assert.Throws<Exception>(() => new Table(null, defaultPageSize: 1), "table's data records must not be null"); 
+        }
+        
+        [TestCase(0)]
+        [TestCase(-1)]
+        public void Create_GivenADefaultInvalidDefaultPage_Throws(int invalidPageSize)
+        {
+            Assert.Throws<Exception>(() => { new Table(DataRecords(), invalidPageSize); }, "table's default page size must be higher than 1");
+        }
+
+        private DataRecord RecordFor(int index = 0, string field = "field")
         {
             var record = new DataRecord();
             record.Add(field + index);
@@ -53,8 +68,8 @@ namespace AppKataCsvViewerUnitTests
             record.Add(field + index);
             return record;
         }
-        
-        private static Page PageContainsRecords(int @from, int to)
+
+        private Page PageContainsRecords(int @from, int to)
         {
             var page = CreatePage();
             page.Add(RecordFor(field: "header"));
@@ -65,7 +80,7 @@ namespace AppKataCsvViewerUnitTests
             return page;
         }
 
-        private static Page ExpectedLastPage()
+        private Page ExpectedLastPage()
         {
             var page = CreatePage();
             page.Add(RecordFor(field: "header"));
@@ -73,9 +88,15 @@ namespace AppKataCsvViewerUnitTests
             return page;
         }
 
-        private static Page CreatePage()
+        private Page CreatePage()
         {
             return new Page(new PageConsoleFormatter(new MaxConsoleColumnLengthsIdentifier()));
+        }
+
+        private List<DataRecord> DataRecords()
+        {
+            var dataRecords = new List<DataRecord> { new DataRecord() };
+            return dataRecords;
         }
     }
 }

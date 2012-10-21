@@ -9,7 +9,7 @@ namespace AppKataCsvViewerUnitTests
     [TestFixture]
     public class CsvViewerTest
     {
-        private static Table DUMMY_TABLE = DUMMY_TABLE = new Table(new List<DataRecord>{new DataRecord()}, 0);
+        private static Table DUMMY_TABLE = DUMMY_TABLE = new Table(new List<DataRecord>{new DataRecord()}, defaultPageSize: 1);
 
         [TestCase("x")]
         [TestCase("exit")]

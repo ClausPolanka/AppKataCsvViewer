@@ -38,14 +38,14 @@ namespace AppKataCsvViewer
             return headerLine;
         }
 
-        private string WhiteSpacesFor(string word, int maxColumnLength)
+        private string WhiteSpacesFor(string field, int maxColumnLength)
         {
-            if (word.Length == maxColumnLength)
+            if (field.Length == maxColumnLength)
                 return String.Empty;
 
             string spaces = String.Empty;
 
-            for (int i = 0; i < (maxColumnLength - word.Length); i++)
+            for (int i = 0; i < (maxColumnLength - field.Length); i++)
                 spaces += WHITE_SPACE;
 
             return spaces;

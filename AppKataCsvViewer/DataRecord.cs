@@ -6,9 +6,9 @@ namespace AppKataCsvViewer
     {
         private readonly List<string> fields = new List<string>();
 
-        public void Add(string word)
+        public void Add(string field)
         {
-            fields.Add(word);
+            fields.Add(field);
         }
 
         public int ColumnCount { get { return fields.Count; } }
