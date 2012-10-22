@@ -22,7 +22,8 @@ namespace AppKataCsvViewerUnitTests
             Table table = new Table(ThreeDataRecords(), defaultPageSize: 3);
 
             var sut = new ConsoleDisplay();
-            sut.Show(table);
+            sut.Show(table.NextPage());
+            sut.PrintUserOptionsFor(table.PageCount);
 
             var expected = "Field1|Field2|Field3|" + NL +
                            "------+------+------+" + NL +
@@ -40,7 +41,8 @@ namespace AppKataCsvViewerUnitTests
             Table table = new Table(ThreeDataRecords(), defaultPageSize: 1);
 
             var sut = new ConsoleDisplay();
-            sut.Show(table);
+            sut.Show(table.NextPage());
+            sut.PrintUserOptionsFor(table.PageCount);
 
             var expectedOutput = "Field1|Field2|Field3|" + NL +
                                  "------+------+------+" + NL +

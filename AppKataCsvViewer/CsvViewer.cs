@@ -15,7 +15,8 @@ namespace AppKataCsvViewer
 
         public void Show(Table table)
         {
-            display.Show(table);
+            display.Show(table.NextPage());
+            display.PrintUserOptionsFor(table.PageCount);
             ExecuteCommandEnteredByUser(table);
         }
 
@@ -29,9 +30,17 @@ namespace AppKataCsvViewer
                 {
                     break;
                 }
+
                 if (command.ToLower() == "n" || command.ToLower() == "next")
                 {
-                    display.Show(table);
+                    display.Show(table.NextPage());
+                    display.PrintUserOptionsFor(table.PageCount);
+                }
+
+                if (command.ToLower() == "p" || command.ToLower() == "previous")
+                {
+                    display.Show(table.PreviousPage());
+                    display.PrintUserOptionsFor(table.PageCount);
                 }
 
                 // TODO: Execute entered command.

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace AppKataCsvViewer
 {
@@ -7,21 +6,16 @@ namespace AppKataCsvViewer
     {
         public const string EXIT_COMMAND = "eX(it";
         public const string ALL_USER_COMMANDS = "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
-
-
-        public void Show(Table table)
+        
+        public void Show(Page page)
         {
-            Page page = table.NextPage();
-
             Console.Out.Write(page.Header());
             Console.Out.Write(page.DataRecords());
-            
-            PrintUserOptionsFor(table.Pages);
         }
 
-        private void PrintUserOptionsFor(List<Page> pages)
+        public void PrintUserOptionsFor(int pageCount)
         {
-            if (pages.Count > 1)
+            if (pageCount > 1)
                 PrintAllUserOptions();
             else
                 PrintExitCommand();

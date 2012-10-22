@@ -8,7 +8,7 @@ namespace AppKataCsvViewerEndToEndTests
 {
     public class ApplicationTestExecutor : UserCommandReceiverListener
     {
-        private readonly StringWriter consoleOutput;
+        private StringWriter consoleOutput;
         private Thread thread;
 
         public ApplicationTestExecutor(StringWriter consoleOutput)
@@ -40,15 +40,17 @@ namespace AppKataCsvViewerEndToEndTests
         private void ClearConsoleOutputBuffer()
         {
             StringBuilder sb = consoleOutput.GetStringBuilder();
-            sb.Remove(0, sb.Length - 1);
+            sb.Clear();
         }
 
         public void ReadsUserCommmand(string cmd)
         {
             if (cmd.ToLower() == "n" || cmd.ToLower() == "next")
-            {
                 ClearConsoleOutputBuffer();
-            }
+
+            if (cmd.ToLower() == "p" || cmd.ToLower() == "previous")
+                ClearConsoleOutputBuffer();
+
             Console.SetIn(new StringReader(cmd));
             thread.Join(200);
         }

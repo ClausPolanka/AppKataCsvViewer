@@ -9,7 +9,7 @@ namespace AppKataCsvViewerUnitTests
     [TestFixture]
     public class CsvViewerTest
     {
-        private static Table DUMMY_TABLE = DUMMY_TABLE = new Table(new List<DataRecord>{new DataRecord()}, defaultPageSize: 1);
+        private static Table DUMMY_TABLE = DUMMY_TABLE = new Table(new List<DataRecord>{new DataRecord(), new DataRecord()}, defaultPageSize: 1);
 
         [TestCase("x")]
         [TestCase("exit")]
@@ -23,7 +23,8 @@ namespace AppKataCsvViewerUnitTests
 
             sut.Show(DUMMY_TABLE);
 
-            display.Received().Show(DUMMY_TABLE);
+            display.Received().PrintUserOptionsFor(DUMMY_TABLE.PageCount);
+            display.Received().Show(DUMMY_TABLE.NextPage());
         }
 
         [TestCase("n", "x")]
@@ -40,7 +41,7 @@ namespace AppKataCsvViewerUnitTests
 
             sut.Show(DUMMY_TABLE);
 
-            display.Received(2 /* Times */).Show(DUMMY_TABLE);
+            display.Received(2 /* Times */).Show(DUMMY_TABLE.NextPage());
         }
 
         [TestCase("")]

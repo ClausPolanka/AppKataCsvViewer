@@ -49,6 +49,30 @@ namespace AppKataCsvViewerUnitTests
         }
 
         [Test]
+        public void PreviousPage_GivenDataRecordsAndPageSize_ReturnsPreviousPage()
+        {
+            var sut = new Table(Create10Records(), defaultPageSize: 3);
+
+            Page nextPage = sut.PreviousPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages.Last()), "table's page");
+
+            nextPage = sut.PreviousPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages[2]), "table's page");
+
+            nextPage = sut.PreviousPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages[1]), "table's page");
+
+            nextPage = sut.PreviousPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages.First()), "table's page");
+            
+            nextPage = sut.PreviousPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages.Last()), "table's page");
+
+            nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages.First()), "table's page");
+        }
+
+        [Test]
         public void Create_GivenDataRecords_InitializePages()
         {
             List<DataRecord> dataRecords = new List<DataRecord> { RecordFor(field: "header") };

@@ -9,7 +9,9 @@ namespace AppKataCsvViewer
         private const int INDEX_OF_HEADER = 0;
 
         private readonly List<Page> pages = new List<Page>();
+        
         private int pageNumber;
+        private bool WasExecutedFirstTime = true;
 
         public Table(List<DataRecord> dataRecords, int defaultPageSize)
         {
@@ -38,6 +40,7 @@ namespace AppKataCsvViewer
 
                 pos += pageSize;
             }
+
             return pages;
         }
 
@@ -54,10 +57,33 @@ namespace AppKataCsvViewer
 
         public Page NextPage()
         {
-            if (pageNumber == Pages.Count)
-                return Pages[0];
+            if (WasExecutedFirstTime)
+            {
+                WasExecutedFirstTime = false;
+                return Pages[pageNumber];
+            }
 
-            return Pages[pageNumber++];
+            if (pageNumber == Pages.Count - 1)
+            {
+                pageNumber = 0;
+                return Pages[0];
+            }
+
+            return Pages[++pageNumber];
+        }
+
+        public Page PreviousPage()
+        {
+            if (WasExecutedFirstTime)
+                WasExecutedFirstTime = false;
+
+            if (pageNumber == 0)
+            {
+                pageNumber = Pages.Count - 1;
+                return Pages.Last();
+            }
+
+            return Pages[--pageNumber];
         }
 
         public int PageCount { get { return pages.Count; } }

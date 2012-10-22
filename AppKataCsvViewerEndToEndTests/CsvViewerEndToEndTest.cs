@@ -10,6 +10,7 @@ namespace AppKataCsvViewerEndToEndTests
         private const string NEW_LINE = "\r\n";
         private const string CSV_FILE_NAME = "persons.csv";
         private const string NEXT_COMMAND = "n";
+        private const string PREVIOUS_COMMAND = "p";
         private const string EXIT_COMMAND = "x";
 
         private StringWriter generatedCsvOutput;
@@ -133,6 +134,7 @@ namespace AppKataCsvViewerEndToEndTests
 
             Assert.That(WithoutLineBreaks(generatedCsvOutput), Is.EqualTo(nextPage), "formatted csv output");
         }
+
         [Test]
         public void ForADefaultPageSizeOf3AndUserReachesLastPageAndEntersNextCommand_ViewerShowsFirstPageForGivenCsvDataAndExits()
         {
@@ -154,6 +156,38 @@ namespace AppKataCsvViewerEndToEndTests
             csvViewerRunner.ReadsUserCommmand(NEXT_COMMAND);
             csvViewerRunner.ReadsUserCommmand(NEXT_COMMAND);
             csvViewerRunner.ReadsUserCommmand(NEXT_COMMAND);
+            csvViewerRunner.ReadsUserCommmand(EXIT_COMMAND);
+
+            var expected = "Name |Age|City    |" +
+                           "-----+---+--------+" +
+                           "Peter|42 |New York|" +
+                           "Paul |57 |London  |" +
+                           "Mary |35 |Munich  |" +
+                           "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
+
+            Assert.That(WithoutLineBreaks(generatedCsvOutput), Is.EqualTo(expected), "formatted csv output");
+        }
+
+        [Test]
+        public void GivenCsvContentAndADefaultPageSizeOf3_UserEntersNextPreviousAndExitCommand_TablesFirstPageWillBeShown()
+        {
+            var csvContent = new[] 
+            { 
+                "Name;Age;City", 
+                "Peter;42;New York", 
+                "Paul;57;London", 
+                "Mary;35;Munich",
+                "Jaques;66;Paris",
+                "Yuri;23;Moscow",
+                "Stephanie;47;Stockholm",
+                "Nadia;29;Madrid"
+            };
+
+            CreateTemporaryCsvFileWith(csvContent);
+
+            csvViewerRunner.ExecuteViewerFor(CSV_FILE_NAME);
+            csvViewerRunner.ReadsUserCommmand(NEXT_COMMAND);
+            csvViewerRunner.ReadsUserCommmand(PREVIOUS_COMMAND);
             csvViewerRunner.ReadsUserCommmand(EXIT_COMMAND);
 
             var expected = "Name |Age|City    |" +
