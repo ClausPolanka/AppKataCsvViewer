@@ -68,6 +68,25 @@ namespace AppKataCsvViewerUnitTests
             display.ReceivedWithAnyArgs(2).Show(DUMMY_PAGE);
         }
 
+        [TestCase("l", "x")]
+        [TestCase("last", "exit")]
+        public void Show_UserEntersLast_ShowsLastPageAndExits(string lastCommand, string exitCommand)
+        {
+            var display = Substitute.For<Display>();
+            var cmdStub = Substitute.For<UserCommandReceiver>();
+            var browsable = Substitute.For<Browsable>();
+            var sut = new CsvViewer(cmdStub, display);
+            
+            cmdStub.ReceiveUserCommand().Returns(lastCommand, exitCommand);
+
+            sut.Show(browsable);
+
+            browsable.Received(1).NextPage();
+            browsable.Received(1).LastPage();
+            display.ReceivedWithAnyArgs(2).PrintUserOptionsFor(DUMMY_PAGECOUNT);
+            display.ReceivedWithAnyArgs(2).Show(DUMMY_PAGE);
+        }
+
         [TestCase("")]
         [TestCase(null)]
         public void Show_UserEntersWrongCommand_CsvViewerShowsTableAndThrows(string wrongCommand)

@@ -71,6 +71,17 @@ namespace AppKataCsvViewerUnitTests
             nextPage = sut.NextPage();
             Assert.That(nextPage, Is.EqualTo(sut.Pages.First()), "table's page");
         }
+        [Test]
+        public void LastPage_GivenDataRecordsAndPageSize_ReturnsLastPage()
+        {
+            var sut = new Table(Create10Records(), defaultPageSize: 3);
+
+            Page nextPage = sut.LastPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages.Last()), "table's page");
+            
+            nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages.First()), "table's page");
+        }
 
         [Test]
         public void Create_GivenDataRecords_InitializePages()

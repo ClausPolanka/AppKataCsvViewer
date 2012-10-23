@@ -85,7 +85,12 @@ namespace AppKataCsvViewer
 
             return Pages[--pageNumber];
         }
-
+        
+        public Page LastPage()
+        {
+            return Pages.Last();
+        }
+        
         public int PageCount { get { return pages.Count; } }
         public DataRecord Header { get; private set; }
         public List<Page> Pages { get { return pages; } }
