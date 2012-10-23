@@ -10,8 +10,10 @@ Q:If there is only data for a single page what options should be displayed?
 
 Tasks:
 
-Add unit tests for previous command.
-Implement First and Last command.
+Replace Switch With Polymorphism.
+Move PrintUserOptionsFor to display. Is PageCount necessary? Requirements?
+Simplify Browsable implementation in table.
+DataRecords2Page into seperate class?
 
 Protocol:
 
@@ -35,3 +37,4 @@ Added CsvTest to get more unit-test coverage                                    
 Added CsvConverter Integration-Tests                                                            20.10.2012    3
 Table's NextPage jumps to first page if last page was reached.                                  21.10.2012    3
 Implemented Previous command with new end to end test.                                          22.10.2012    3
+Implemented First and Last command with new end to end tests.                                   23.10.2012    3
