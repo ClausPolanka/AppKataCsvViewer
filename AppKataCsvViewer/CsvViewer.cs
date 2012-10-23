@@ -13,14 +13,14 @@ namespace AppKataCsvViewer
             this.display = display;
         }
 
-        public void Show(Table table)
+        public void Show(Browsable browsable)
         {
-            display.Show(table.NextPage());
-            display.PrintUserOptionsFor(table.PageCount);
-            ExecuteCommandEnteredByUser(table);
+            display.Show(browsable.NextPage());
+            display.PrintUserOptionsFor(browsable.PageCount);
+            ExecuteCommandEnteredByUser(browsable);
         }
 
-        private void ExecuteCommandEnteredByUser(Table table)
+        private void ExecuteCommandEnteredByUser(Browsable browsable)
         {
             string command;
 
@@ -33,18 +33,19 @@ namespace AppKataCsvViewer
 
                 if (command.ToLower() == "n" || command.ToLower() == "next")
                 {
-                    display.Show(table.NextPage());
-                    display.PrintUserOptionsFor(table.PageCount);
+                    display.Show(browsable.NextPage());
+                    display.PrintUserOptionsFor(browsable.PageCount);
                 }
 
                 if (command.ToLower() == "p" || command.ToLower() == "previous")
                 {
-                    display.Show(table.PreviousPage());
-                    display.PrintUserOptionsFor(table.PageCount);
+                    display.Show(browsable.PreviousPage());
+                    display.PrintUserOptionsFor(browsable.PageCount);
                 }
 
                 // TODO: Execute entered command.
             }
+
             if (command == null || command.ToLower() != "x" && command.ToLower() != "exit")
             {
                 throw new Exception("No or wrong command was entered by user: " + command);

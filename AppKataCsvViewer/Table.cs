@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AppKataCsvViewer
 {
-    public class Table
+    public class Table : Browsable
     {
         private const int INDEX_OF_HEADER = 0;
 

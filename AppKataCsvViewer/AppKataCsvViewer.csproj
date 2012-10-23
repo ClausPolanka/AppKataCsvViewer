@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Browsable.cs" />
     <Compile Include="MaxConsoleColumnLengthsIdentifier.cs" />
     <Compile Include="MaxConsoleLengthsIdentifier.cs" />
     <Compile Include="PageConsoleFormatter.cs" />
