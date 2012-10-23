@@ -71,6 +71,7 @@ namespace AppKataCsvViewerUnitTests
             nextPage = sut.NextPage();
             Assert.That(nextPage, Is.EqualTo(sut.Pages.First()), "table's page");
         }
+
         [Test]
         public void LastPage_GivenDataRecordsAndPageSize_ReturnsLastPage()
         {
@@ -81,6 +82,35 @@ namespace AppKataCsvViewerUnitTests
             
             nextPage = sut.NextPage();
             Assert.That(nextPage, Is.EqualTo(sut.Pages.First()), "table's page");
+        }
+
+        [Test]
+        public void FirstPage_GivenDataRecordsAndPageSize_ReturnsFirstPage()
+        {
+            var sut = new Table(Create10Records(), defaultPageSize: 3);
+
+            Page nextPage = sut.LastPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages.Last()), "table's page");
+            
+            nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages.First()), "table's page");
+            
+            nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages[1]), "table's page");
+            
+            nextPage = sut.NextPage();
+            Assert.That(nextPage, Is.EqualTo(sut.Pages[2]), "table's page");
+
+            nextPage = sut.LastPage();
+            Assert.That(nextPage, Is.EqualTo(sut.LastPage()), "table's page");
+
+            nextPage = sut.FirstPage();
+            Assert.That(nextPage, Is.EqualTo(sut.FirstPage()), "table's page");
+
+            nextPage = sut.PreviousPage();
+            Assert.That(nextPage, Is.EqualTo(sut.LastPage()), "table's page");
+
+
         }
 
         [Test]

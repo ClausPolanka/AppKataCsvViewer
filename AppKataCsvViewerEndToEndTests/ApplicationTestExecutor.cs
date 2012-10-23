@@ -54,6 +54,9 @@ namespace AppKataCsvViewerEndToEndTests
             if (cmd.ToLower() == "l" || cmd.ToLower() == "last")
                 ClearConsoleOutputBuffer();
 
+            if (cmd.ToLower() == "f" || cmd.ToLower() == "first")
+                ClearConsoleOutputBuffer();
+
             Console.SetIn(new StringReader(cmd));
             thread.Join(200);
         }

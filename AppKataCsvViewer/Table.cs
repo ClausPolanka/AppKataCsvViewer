@@ -88,9 +88,22 @@ namespace AppKataCsvViewer
         
         public Page LastPage()
         {
+            if (WasExecutedFirstTime)
+                WasExecutedFirstTime = false;
+
+            pageNumber = Pages.Count - 1;
             return Pages.Last();
         }
-        
+
+        public Page FirstPage()
+        {
+            if (WasExecutedFirstTime)
+                WasExecutedFirstTime = false;
+
+            pageNumber = 0;
+            return Pages.First();
+        }
+
         public int PageCount { get { return pages.Count; } }
         public DataRecord Header { get; private set; }
         public List<Page> Pages { get { return pages; } }

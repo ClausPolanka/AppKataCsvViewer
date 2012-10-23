@@ -43,6 +43,12 @@ namespace AppKataCsvViewer
                     display.PrintUserOptionsFor(browsable.PageCount);
                 }
 
+                if (command.ToLower() == "f" || command.ToLower() == "first")
+                {
+                    display.Show(browsable.FirstPage());
+                    display.PrintUserOptionsFor(browsable.PageCount);
+                }
+
                 if (command.ToLower() == "l" || command.ToLower() == "last")
                 {
                     display.Show(browsable.LastPage());

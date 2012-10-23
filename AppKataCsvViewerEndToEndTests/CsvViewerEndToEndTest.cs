@@ -11,6 +11,7 @@ namespace AppKataCsvViewerEndToEndTests
         private const string CSV_FILE_NAME = "persons.csv";
         private const string NEXT_COMMAND = "N";
         private const string PREVIOUS_COMMAND = "P";
+        private const string FIRST_COMMAND = "F";
         private const string LAST_COMMAND = "L";
         private const string EXIT_COMMAND = "x";
 
@@ -225,6 +226,38 @@ namespace AppKataCsvViewerEndToEndTests
             var expected = "Name |Age|City  |" +
                            "-----+---+------+" +
                            "Nadia|29 |Madrid|" +
+                           "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
+
+            Assert.That(WithoutLineBreaks(generatedCsvOutput), Is.EqualTo(expected), "formatted csv output");
+        }
+
+        [Test]
+        public void GivenCsvContentAndADefaultPageSizeOf3_UserEntersLastFirstAndExitCommand_TablesFirstPageWillBeShown()
+        {
+            var csvContent = new[] 
+            { 
+                "Name;Age;City", 
+                "Peter;42;New York", 
+                "Paul;57;London", 
+                "Mary;35;Munich",
+                "Jaques;66;Paris",
+                "Yuri;23;Moscow",
+                "Stephanie;47;Stockholm",
+                "Nadia;29;Madrid"
+            };
+
+            CreateTemporaryCsvFileWith(csvContent);
+
+            csvViewerRunner.ExecuteViewerFor(CSV_FILE_NAME);
+            csvViewerRunner.ReadsUserCommmand(LAST_COMMAND);
+            csvViewerRunner.ReadsUserCommmand(FIRST_COMMAND);
+            csvViewerRunner.ReadsUserCommmand(EXIT_COMMAND);
+
+            var expected = "Name |Age|City    |" +
+                           "-----+---+--------+" +
+                           "Peter|42 |New York|" +
+                           "Paul |57 |London  |" +
+                           "Mary |35 |Munich  |" +
                            "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
 
             Assert.That(WithoutLineBreaks(generatedCsvOutput), Is.EqualTo(expected), "formatted csv output");

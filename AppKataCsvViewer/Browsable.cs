@@ -6,5 +6,6 @@ namespace AppKataCsvViewer
         Page PreviousPage();
         int PageCount { get; }
         Page LastPage();
+        Page FirstPage();
     }
 }
