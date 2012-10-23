@@ -1,4 +1,4 @@
-Nodes:
+Notes:
 
 Q: Will .exe be created by VS by default in bin directory?
 A: No, in bin/Debug directory.
@@ -6,13 +6,12 @@ A: No, in bin/Debug directory.
 Q: Integration test without creating the .exe in code.
 A: Yes, because currently it will be created by default by VS in bin/Debug directory.
 
-Should I use a Mocking Framework for the Integration tests?    
-
-If there is only data for a single page what options should be displayed?
+Q:If there is only data for a single page what options should be displayed?
 
 Tasks:
 
-Implement Prev command.
+Add unit tests for previous command.
+Implement First and Last command.
 
 Protocol:
 
@@ -35,3 +34,4 @@ Code review, Re-evaluated design and refactored towards new design decisions.   
 Added CsvTest to get more unit-test coverage                                                    18.10.2012    2
 Added CsvConverter Integration-Tests                                                            20.10.2012    3
 Table's NextPage jumps to first page if last page was reached.                                  21.10.2012    3
+Implemented Previous command with new end to end test.                                          22.10.2012    3
