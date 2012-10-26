@@ -12,9 +12,9 @@ namespace AppKataCsvViewer
         public static void Main(string[] args)
         {
             List<DataRecord> dataRecords = new CsvFileConverter().ToDataRecords(args[FILE_NAME]);
-            var csvUserCommands = new CsvUserCommands(new ConsoleDisplay(), new Table(dataRecords, 3));
+            var csvUserCommands = new CsvUserCommands(new ConsoleDisplay(), new Table(dataRecords, defaultPageSize: 3));
             var csvViewer = new CsvViewer(new ConsoleUserUserCommandReceiver(userCommandReceiverListener), csvUserCommands);
-            csvViewer.Show();
+            csvViewer.Execute();
         }
     }
 

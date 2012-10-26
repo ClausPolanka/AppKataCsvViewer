@@ -22,7 +22,7 @@ namespace AppKataCsvViewerUnitTests
             
             cmdStub.ReceiveUserCommand().Returns(exitCommand);
 
-            sut.Show();
+            sut.Execute();
 
             browsable.Received(1).NextPage();
             display.ReceivedWithAnyArgs(1).PrintUserOptionsFor(DUMMY_PAGECOUNT);
@@ -42,7 +42,7 @@ namespace AppKataCsvViewerUnitTests
             
             cmdStub.ReceiveUserCommand().Returns(nextCommand,exitCommand);
 
-            sut.Show();
+            sut.Execute();
 
             browsable.Received(2).NextPage();
             display.ReceivedWithAnyArgs(2).PrintUserOptionsFor(DUMMY_PAGECOUNT);
@@ -60,7 +60,7 @@ namespace AppKataCsvViewerUnitTests
             
             cmdStub.ReceiveUserCommand().Returns(previousCommand, exitCommand);
 
-            sut.Show();
+            sut.Execute();
 
             browsable.Received(1).NextPage();
             browsable.Received(1).PreviousPage();
@@ -79,7 +79,7 @@ namespace AppKataCsvViewerUnitTests
             
             cmdStub.ReceiveUserCommand().Returns(lastCommand, exitCommand);
 
-            sut.Show();
+            sut.Execute();
 
             browsable.Received(1).NextPage();
             browsable.Received(1).LastPage();
@@ -98,7 +98,7 @@ namespace AppKataCsvViewerUnitTests
             
             cmdStub.ReceiveUserCommand().Returns(lastCommand, exitCommand);
 
-            sut.Show();
+            sut.Execute();
 
             browsable.Received(1).NextPage();
             browsable.Received(1).FirstPage();
@@ -117,7 +117,7 @@ namespace AppKataCsvViewerUnitTests
 
             cmdStub.ReceiveUserCommand().Returns(wrongCommand);
             
-            Assert.Throws<Exception>(() => sut.Show());
+            Assert.Throws<Exception>(() => sut.Execute());
         }
     }
 }

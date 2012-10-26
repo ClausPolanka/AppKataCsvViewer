@@ -4,7 +4,7 @@ namespace AppKataCsvViewer
 {
     public class CsvUserCommands
     {
-        public const string NEXT = "next";
+        private const string NEXT = "next";
 
         private readonly Dictionary<string, UserCommand> commands = new Dictionary<string, UserCommand>();
 
@@ -23,6 +23,11 @@ namespace AppKataCsvViewer
         public void Execute(string command)
         {
             commands[command.ToLower()].Execute();
+        }
+
+        public void NextPage()
+        {
+            commands[NEXT].Execute();
         }
     }
 }

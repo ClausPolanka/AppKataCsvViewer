@@ -13,9 +13,9 @@ namespace AppKataCsvViewer
             this.commands = commands;
         }
 
-        public void Show()
+        public void Execute()
         {
-            commands.Execute(CsvUserCommands.NEXT);
+            commands.NextPage();
             ExecuteCommandEnteredByUser();
         }
 
