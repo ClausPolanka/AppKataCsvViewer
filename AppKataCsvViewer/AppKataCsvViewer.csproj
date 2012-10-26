@@ -46,10 +46,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Browsable.cs" />
+    <Compile Include="CsvUserCommands.cs" />
+    <Compile Include="ExitCommand.cs" />
+    <Compile Include="FirstPageCommand.cs" />
+    <Compile Include="LastPageCommand.cs" />
     <Compile Include="MaxConsoleColumnLengthsIdentifier.cs" />
     <Compile Include="MaxConsoleLengthsIdentifier.cs" />
+    <Compile Include="NextPageCommand.cs" />
     <Compile Include="PageConsoleFormatter.cs" />
     <Compile Include="PageFormatter.cs" />
+    <Compile Include="PreviousPageCommand.cs" />
+    <Compile Include="UserCommand.cs" />
     <Compile Include="UserCommandReceiver.cs" />
     <Compile Include="UserCommandReceiverListener.cs" />
     <Compile Include="ConsoleUserUserCommandReceiver.cs" />

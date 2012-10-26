@@ -18,11 +18,11 @@ namespace AppKataCsvViewerUnitTests
             var display = Substitute.For<Display>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
             var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, display);
+            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
             
             cmdStub.ReceiveUserCommand().Returns(exitCommand);
 
-            sut.Show(browsable);
+            sut.Show();
 
             browsable.Received(1).NextPage();
             display.ReceivedWithAnyArgs(1).PrintUserOptionsFor(DUMMY_PAGECOUNT);
@@ -38,11 +38,11 @@ namespace AppKataCsvViewerUnitTests
             var display = Substitute.For<Display>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
             var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, display);
+            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
             
             cmdStub.ReceiveUserCommand().Returns(nextCommand,exitCommand);
 
-            sut.Show(browsable);
+            sut.Show();
 
             browsable.Received(2).NextPage();
             display.ReceivedWithAnyArgs(2).PrintUserOptionsFor(DUMMY_PAGECOUNT);
@@ -56,11 +56,11 @@ namespace AppKataCsvViewerUnitTests
             var display = Substitute.For<Display>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
             var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, display);
+            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
             
             cmdStub.ReceiveUserCommand().Returns(previousCommand, exitCommand);
 
-            sut.Show(browsable);
+            sut.Show();
 
             browsable.Received(1).NextPage();
             browsable.Received(1).PreviousPage();
@@ -75,11 +75,11 @@ namespace AppKataCsvViewerUnitTests
             var display = Substitute.For<Display>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
             var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, display);
+            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
             
             cmdStub.ReceiveUserCommand().Returns(lastCommand, exitCommand);
 
-            sut.Show(browsable);
+            sut.Show();
 
             browsable.Received(1).NextPage();
             browsable.Received(1).LastPage();
@@ -94,11 +94,11 @@ namespace AppKataCsvViewerUnitTests
             var display = Substitute.For<Display>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
             var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, display);
+            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
             
             cmdStub.ReceiveUserCommand().Returns(lastCommand, exitCommand);
 
-            sut.Show(browsable);
+            sut.Show();
 
             browsable.Received(1).NextPage();
             browsable.Received(1).FirstPage();
@@ -113,11 +113,11 @@ namespace AppKataCsvViewerUnitTests
             var display = Substitute.For<Display>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
             var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, display);
+            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
 
             cmdStub.ReceiveUserCommand().Returns(wrongCommand);
             
-            Assert.Throws<Exception>(() => sut.Show(browsable));
+            Assert.Throws<Exception>(() => sut.Show());
         }
     }
 }
