@@ -10,7 +10,8 @@ Q:If there is only data for a single page what options should be displayed?
 
 Tasks:
 
-Replace Switch With Polymorphism.
+Check CsvViewer Unit-Tests.
+Are all abstraction still appropriatly named?
 Move PrintUserOptionsFor to display. Is PageCount necessary? Requirements?
 Simplify Browsable implementation in table.
 DataRecords2Page into seperate class?
@@ -38,3 +39,4 @@ Added CsvConverter Integration-Tests                                            
 Table's NextPage jumps to first page if last page was reached.                                  21.10.2012    3
 Implemented Previous command with new end to end test.                                          22.10.2012    3
 Implemented First and Last command with new end to end tests.                                   23.10.2012    3
+Replaced swith with Polymorphism.                                                               26.10.2012    2
