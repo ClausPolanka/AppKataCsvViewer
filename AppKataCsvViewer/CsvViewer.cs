@@ -5,9 +5,9 @@ namespace AppKataCsvViewer
     public class CsvViewer
     {
         private readonly UserCommandReceiver userCommandReceiver;
-        private CsvUserCommands commands;
+        private UserCommands commands;
 
-        public CsvViewer(UserCommandReceiver userCommandReceiver, CsvUserCommands commands)
+        public CsvViewer(UserCommandReceiver userCommandReceiver, UserCommands commands)
         {
             this.userCommandReceiver = userCommandReceiver;
             this.commands = commands;
@@ -15,7 +15,7 @@ namespace AppKataCsvViewer
 
         public void Execute()
         {
-            commands.NextPage();
+            commands.FirstPage();
             ExecuteCommandEnteredByUser();
         }
 

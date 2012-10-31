@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace AppKataCsvViewer
 {
-    public class CsvUserCommands
+    public class CsvUserCommands : UserCommands
     {
         private const string NEXT = "next";
 
@@ -25,7 +25,7 @@ namespace AppKataCsvViewer
             commands[command.ToLower()].Execute();
         }
 
-        public void NextPage()
+        public void FirstPage()
         {
             commands[NEXT].Execute();
         }

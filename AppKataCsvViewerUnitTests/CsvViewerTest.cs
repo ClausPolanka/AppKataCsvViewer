@@ -9,24 +9,22 @@ namespace AppKataCsvViewerUnitTests
     public class CsvViewerTest
     {
         private static Page DUMMY_PAGE = new Page(new PageConsoleFormatter(new MaxConsoleColumnLengthsIdentifier()));
-        private static int DUMMY_PAGECOUNT;
+        private static int DUMMY_PAGE_COUNT;
 
         [TestCase("x")]
         [TestCase("exit")]
         public void Show_UserEntersExit_ShowsFirstPageAndExits(string exitCommand)
         {
-            var display = Substitute.For<Display>();
+            var userCommands = Substitute.For<UserCommands>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
-            var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
+            var sut = new CsvViewer(cmdStub, userCommands);
             
             cmdStub.ReceiveUserCommand().Returns(exitCommand);
 
             sut.Execute();
 
-            browsable.Received(1).NextPage();
-            display.ReceivedWithAnyArgs(1).PrintUserOptionsFor(DUMMY_PAGECOUNT);
-            display.ReceivedWithAnyArgs(1).Show(DUMMY_PAGE);
+            userCommands.Received(1).FirstPage();
+            userCommands.DidNotReceive().Execute(Arg.Any<string>());
         }
 
         [TestCase("n", "x")]
@@ -35,85 +33,73 @@ namespace AppKataCsvViewerUnitTests
         [TestCase("next", "exit")]
         public void Show_UserEntersNext_ShowsNextPageAndExits(string nextCommand, string exitCommand)
         {
-            var display = Substitute.For<Display>();
+            var userCommands = Substitute.For<UserCommands>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
-            var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
-            
-            cmdStub.ReceiveUserCommand().Returns(nextCommand,exitCommand);
+            var sut = new CsvViewer(cmdStub, userCommands);
+
+            cmdStub.ReceiveUserCommand().Returns(nextCommand, exitCommand);
 
             sut.Execute();
 
-            browsable.Received(2).NextPage();
-            display.ReceivedWithAnyArgs(2).PrintUserOptionsFor(DUMMY_PAGECOUNT);
-            display.ReceivedWithAnyArgs(2).Show(DUMMY_PAGE);
+            userCommands.Received(1).FirstPage();
+            userCommands.Received(1).Execute(nextCommand);
         }
 
         [TestCase("p", "x")]
         [TestCase("previous", "exit")]
         public void Show_UserEntersPrevious_ShowsPreviousPageAndExits(string previousCommand, string exitCommand)
         {
-            var display = Substitute.For<Display>();
+            var userCommands = Substitute.For<UserCommands>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
-            var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
-            
+            var sut = new CsvViewer(cmdStub, userCommands);
+
             cmdStub.ReceiveUserCommand().Returns(previousCommand, exitCommand);
 
             sut.Execute();
 
-            browsable.Received(1).NextPage();
-            browsable.Received(1).PreviousPage();
-            display.ReceivedWithAnyArgs(2).PrintUserOptionsFor(DUMMY_PAGECOUNT);
-            display.ReceivedWithAnyArgs(2).Show(DUMMY_PAGE);
+            userCommands.Received(1).FirstPage();
+            userCommands.Received(1).Execute(previousCommand);
         }
 
         [TestCase("l", "x")]
         [TestCase("last", "exit")]
         public void Show_UserEntersLast_ShowsLastPageAndExits(string lastCommand, string exitCommand)
         {
-            var display = Substitute.For<Display>();
+            var userCommands = Substitute.For<UserCommands>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
-            var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
-            
+            var sut = new CsvViewer(cmdStub, userCommands);
+
             cmdStub.ReceiveUserCommand().Returns(lastCommand, exitCommand);
 
             sut.Execute();
 
-            browsable.Received(1).NextPage();
-            browsable.Received(1).LastPage();
-            display.ReceivedWithAnyArgs(2).PrintUserOptionsFor(DUMMY_PAGECOUNT);
-            display.ReceivedWithAnyArgs(2).Show(DUMMY_PAGE);
+            userCommands.Received(1).FirstPage();
+            userCommands.Received(1).Execute(lastCommand);
         }
 
         [TestCase("f", "x")]
         [TestCase("first", "exit")]
-        public void Show_UserEntersFirst_ShowsFirstPageAndExits(string lastCommand, string exitCommand)
+        public void Show_UserEntersFirst_ShowsFirstPageAndExits(string firstCommand, string exitCommand)
         {
-            var display = Substitute.For<Display>();
+            var userCommands = Substitute.For<UserCommands>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
-            var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
-            
-            cmdStub.ReceiveUserCommand().Returns(lastCommand, exitCommand);
+            var sut = new CsvViewer(cmdStub, userCommands);
+
+            cmdStub.ReceiveUserCommand().Returns(firstCommand, exitCommand);
 
             sut.Execute();
 
-            browsable.Received(1).NextPage();
-            browsable.Received(1).FirstPage();
-            display.ReceivedWithAnyArgs(2).PrintUserOptionsFor(DUMMY_PAGECOUNT);
-            display.ReceivedWithAnyArgs(2).Show(DUMMY_PAGE);
+            userCommands.Received(1).FirstPage();
+            userCommands.Received(1).Execute(firstCommand);
         }
 
         [TestCase("")]
         [TestCase(null)]
         public void Show_UserEntersWrongCommand_CsvViewerShowsTableAndThrows(string wrongCommand)
         {
-            var display = Substitute.For<Display>();
+            var userCommands = Substitute.For<UserCommands>();
             var cmdStub = Substitute.For<UserCommandReceiver>();
-            var browsable = Substitute.For<Browsable>();
-            var sut = new CsvViewer(cmdStub, new CsvUserCommands(display, browsable));
+            var sut = new CsvViewer(cmdStub, userCommands);
 
             cmdStub.ReceiveUserCommand().Returns(wrongCommand);
             
