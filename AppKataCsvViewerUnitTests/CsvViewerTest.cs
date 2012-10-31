@@ -8,9 +8,6 @@ namespace AppKataCsvViewerUnitTests
     [TestFixture]
     public class CsvViewerTest
     {
-        private static Page DUMMY_PAGE = new Page(new PageConsoleFormatter(new MaxConsoleColumnLengthsIdentifier()));
-        private static int DUMMY_PAGE_COUNT;
-
         [TestCase("x")]
         [TestCase("exit")]
         public void Show_UserEntersExit_ShowsFirstPageAndExits(string exitCommand)
