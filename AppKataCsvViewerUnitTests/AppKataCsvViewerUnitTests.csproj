@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleDisplayTest.cs" />
+    <Compile Include="CsvUserCommandsTest.cs" />
     <Compile Include="CsvViewerTest.cs" />
     <Compile Include="MaxConsoleColumnLengthsIdentifierTest.cs" />
     <Compile Include="PageTest.cs" />
