@@ -54,6 +54,7 @@
     <Compile Include="NextPageCommand.cs" />
     <Compile Include="PageConsoleFormatter.cs" />
     <Compile Include="PageFormatter.cs" />
+    <Compile Include="PageSizeAgent.cs" />
     <Compile Include="PreviousPageCommand.cs" />
     <Compile Include="UserCommand.cs" />
     <Compile Include="UserCommandReceiver.cs" />
