@@ -100,7 +100,7 @@ namespace AppKataCsvViewerUnitTests
 
             cmdStub.ReceiveUserCommand().Returns(wrongCommand);
             
-            Assert.Throws<Exception>(() => sut.Execute());
+            Assert.Throws<CsvViewer.InvalidUserCommand>(() => sut.Execute());
         }
     }
 }

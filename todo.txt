@@ -10,6 +10,8 @@ Q:If there is only data for a single page what options should be displayed?
 
 Tasks:
 
+Test for invalid user commands.
+UTF-8?
 Are all abstraction still appropriatly named?
 Move PrintUserOptionsFor to display. Is PageCount necessary? Requirements?
 Simplify Browsable implementation in table.
