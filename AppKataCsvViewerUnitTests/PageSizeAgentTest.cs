@@ -37,7 +37,7 @@ namespace AppKataCsvViewerUnitTests
 
         [Test]
         public void DetectPageSize_GivenNullAsArgs_ReturnsDefaultPageSize() {
-            var sut = new PageSizeAgent(defaultPageSize: 3, indexOfPageSize: 1);
+            var sut = new PageSizeAgent(3 /* default page size */, IGNORE);
 
             int pageSize = sut.DetectPageSize(null);
 
