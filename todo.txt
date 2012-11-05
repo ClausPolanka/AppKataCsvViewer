@@ -10,7 +10,8 @@ Q:If there is only data for a single page what options should be displayed?
 
 Tasks:
 
-Commands in CsvViewer => Feautre Envy?
+Improve Unit-Test Coverage.
+Extract Equals and test it.
 Test for invalid user commands.
 UTF-8?
 Are all abstraction still appropriatly named?
@@ -44,3 +45,4 @@ Implemented First and Last command with new end to end tests.                   
 Replaced swith with Polymorphism.                                                               26.10.2012    2
 Simplyfied CsvViewerTest. Only verifies on 1 Mock object.                                       31.10.2012    2
 Added PageSizeAgent and simplyfied CsvViewer                                                    01.11.2012    2
+Big Refactoring to improve readability. Commands are no typesafe.                               05.11.2012    4
