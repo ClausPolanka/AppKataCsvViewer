@@ -42,3 +42,4 @@ Implemented Previous command with new end to end test.                          
 Implemented First and Last command with new end to end tests.                                   23.10.2012    3
 Replaced swith with Polymorphism.                                                               26.10.2012    2
 Simplyfied CsvViewerTest. Only verifies on 1 Mock object.                                       31.10.2012    2
+Added PageSizeAgent and simplyfied CsvViewer                                                    01.11.2012    2
