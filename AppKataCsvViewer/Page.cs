@@ -15,17 +15,17 @@ namespace AppKataCsvViewer
             this.pageFormatter = pageFormatter;
         }
 
-        public void Add(DataRecord dataRecord)
+        public virtual void Add(DataRecord dataRecord)
         {
             dataRecords.Add(dataRecord);
         }
 
-        public string Header()
+        public virtual string Header()
         {
             return pageFormatter.HeaderFor(dataRecords);
         }
 
-        public string DataRecords()
+        public virtual string DataRecords()
         {
             return pageFormatter.Formatted(dataRecords);
         } 

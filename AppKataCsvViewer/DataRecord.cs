@@ -6,13 +6,13 @@ namespace AppKataCsvViewer
     {
         private readonly List<string> fields = new List<string>();
 
-        public void Add(string field)
+        public virtual void Add(string field)
         {
             fields.Add(field);
         }
 
-        public int ColumnCount { get { return fields.Count; } }
-        public List<string> Fields { get { return fields; } }
+        public virtual int ColumnCount { get { return fields.Count; } }
+        public virtual List<string> Fields { get { return fields; } }
 
         public override bool Equals(object obj)
         {

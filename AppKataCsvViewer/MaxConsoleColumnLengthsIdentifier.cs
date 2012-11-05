@@ -6,7 +6,7 @@ namespace AppKataCsvViewer
     {
         private const int ANY_RECORD = 0;
 
-        public int[] MaxColumnLengthsOf(List<DataRecord> dataRecords)
+        public virtual int[] MaxColumnLengthsOf(List<DataRecord> dataRecords)
         {
             int columnCount = dataRecords[ANY_RECORD].ColumnCount;
 

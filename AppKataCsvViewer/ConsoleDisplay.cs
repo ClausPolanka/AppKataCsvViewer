@@ -7,13 +7,13 @@ namespace AppKataCsvViewer
         public const string EXIT_COMMAND = "eX(it";
         public const string ALL_USER_COMMANDS = "N(ext page, P(revious page, F(irst page, L(ast page, eX(it";
         
-        public void Show(Page page)
+        public virtual void Show(Page page)
         {
             Console.Out.Write(page.Header());
             Console.Out.Write(page.DataRecords());
         }
 
-        public void PrintUserOptionsFor(int pageCount)
+        public virtual void PrintUserOptionsFor(int pageCount)
         {
             if (pageCount > 1)
                 PrintAllUserOptions();

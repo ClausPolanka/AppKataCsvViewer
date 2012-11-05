@@ -19,7 +19,7 @@ namespace AppKataCsvViewer
             this.indexOfPageSize = indexOfPageSize;
         }
 
-        public int DetectPageSize(string[] args)
+        public virtual int DetectPageSize(string[] args)
         {
             if (args == null || NoIndexForCustomPageSizeWasGiven(args))
                 return defaultPageSize;

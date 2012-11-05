@@ -7,7 +7,7 @@ namespace AppKataCsvViewer
     {
         private const char LINE_SEPARATOR = ';';
 
-        public List<DataRecord> ToDataRecords(string csvFileName)
+        public virtual List<DataRecord> ToDataRecords(string csvFileName)
         {
             List<DataRecord> records = new List<DataRecord>();
 

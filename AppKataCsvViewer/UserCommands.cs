@@ -2,7 +2,7 @@ namespace AppKataCsvViewer
 {
     public interface UserCommands
     {
-        void Execute(string command);
+        void Execute(UserCommand command);
         void FirstPage();
     }
 }

@@ -16,9 +16,9 @@ namespace AppKataCsvViewerEndToEndTests
             this.consoleOutput = consoleOutput;
         }
 
-        public void ExecuteViewerFor(string csvFileName)
+        public virtual void ExecuteViewerFor(string csvFileName)
         {
-            MainEntryPoint.userCommandReceiverListener = this;
+            MainEntryPoint.user = this;
             thread = new Thread(ExecuteCsvViewer);
             thread.Start(csvFileName);
             thread.Join(100);
@@ -43,7 +43,7 @@ namespace AppKataCsvViewerEndToEndTests
             sb.Clear();
         }
 
-        public void ReadsUserCommmand(string cmd)
+        public virtual void ReadsUserCommmand(string cmd)
         {
             if (cmd.ToLower() == "n" || cmd.ToLower() == "next")
                 ClearConsoleOutputBuffer();
@@ -61,7 +61,7 @@ namespace AppKataCsvViewerEndToEndTests
             thread.Join(200);
         }
 
-        public void NotifyNewCommand()
+        public virtual void NotifyNewCommand()
         {
             Thread.Sleep(200);
         }

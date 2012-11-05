@@ -20,7 +20,7 @@ namespace AppKataCsvViewer
             this.maxConsoleColumnLengthsIdentifier = maxConsoleColumnLengthsIdentifier;
         }
 
-        public string HeaderFor(List<DataRecord> dataRecords)
+        public virtual string HeaderFor(List<DataRecord> dataRecords)
         {
             string header = HeaderLine(dataRecords);
             header += HeaderLowerBorderLine(dataRecords);
@@ -71,7 +71,7 @@ namespace AppKataCsvViewer
             return headerLine;
         }
 
-        public string Formatted(List<DataRecord> dataRecords)
+        public virtual string Formatted(List<DataRecord> dataRecords)
         {
             string records = NEW_LINE;
             records += Records(dataRecords);

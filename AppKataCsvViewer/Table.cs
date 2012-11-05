@@ -55,7 +55,7 @@ namespace AppKataCsvViewer
             return page;
         }
 
-        public Page NextPage()
+        public virtual Page NextPage()
         {
             if (WasExecutedFirstTime)
             {
@@ -72,7 +72,7 @@ namespace AppKataCsvViewer
             return Pages[++pageNumber];
         }
 
-        public Page PreviousPage()
+        public virtual Page PreviousPage()
         {
             if (WasExecutedFirstTime)
                 WasExecutedFirstTime = false;
@@ -86,7 +86,7 @@ namespace AppKataCsvViewer
             return Pages[--pageNumber];
         }
         
-        public Page LastPage()
+        public virtual Page LastPage()
         {
             if (WasExecutedFirstTime)
                 WasExecutedFirstTime = false;
@@ -95,7 +95,7 @@ namespace AppKataCsvViewer
             return Pages.Last();
         }
 
-        public Page FirstPage()
+        public virtual Page FirstPage()
         {
             if (WasExecutedFirstTime)
                 WasExecutedFirstTime = false;
@@ -104,8 +104,8 @@ namespace AppKataCsvViewer
             return Pages.First();
         }
 
-        public int PageCount { get { return pages.Count; } }
-        public DataRecord Header { get; private set; }
-        public List<Page> Pages { get { return pages; } }
+        public virtual int PageCount { get { return pages.Count; } }
+        public virtual DataRecord Header { get; private set; }
+        public virtual List<Page> Pages { get { return pages; } }
     }
 }

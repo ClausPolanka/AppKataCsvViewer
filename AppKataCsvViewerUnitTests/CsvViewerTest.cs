@@ -1,5 +1,4 @@
-﻿using System;
-using AppKataCsvViewer;
+﻿using AppKataCsvViewer;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -8,99 +7,84 @@ namespace AppKataCsvViewerUnitTests
     [TestFixture]
     public class CsvViewerTest
     {
-        [TestCase("x")]
-        [TestCase("exit")]
-        public void Show_UserEntersExit_ShowsFirstPageAndExits(string exitCommand)
+        [Test]
+        public void Show_UserEntersExit_ShowsFirstPageAndExits()
         {
             var userCommands = Substitute.For<UserCommands>();
-            var cmdStub = Substitute.For<UserCommandReceiver>();
-            var sut = new CsvViewer(cmdStub, userCommands);
+            var userStub = Substitute.For<User>();
+            var sut = new CsvViewer(userStub, userCommands);
             
-            cmdStub.ReceiveUserCommand().Returns(exitCommand);
+            userStub.EnteredCommand().Returns(new ExitCommand());
 
             sut.Execute();
 
             userCommands.Received(1).FirstPage();
-            userCommands.DidNotReceive().Execute(Arg.Any<string>());
+            userCommands.DidNotReceive().Execute(Arg.Any<UserCommand>());
         }
 
-        [TestCase("n", "x")]
-        [TestCase("next", "x")]
-        [TestCase("n", "exit")]
-        [TestCase("next", "exit")]
-        public void Show_UserEntersNext_ShowsNextPageAndExits(string nextCommand, string exitCommand)
+        [Test]
+        public void Show_UserEntersNext_ShowsNextPageAndExits()
         {
             var userCommands = Substitute.For<UserCommands>();
-            var cmdStub = Substitute.For<UserCommandReceiver>();
-            var sut = new CsvViewer(cmdStub, userCommands);
+            var user = Substitute.For<User>();
+            var sut = new CsvViewer(user, userCommands);
 
-            cmdStub.ReceiveUserCommand().Returns(nextCommand, exitCommand);
+            user.EnteredCommand().Returns(new NextPageCommand(null, null), new ExitCommand());
 
             sut.Execute();
 
             userCommands.Received(1).FirstPage();
-            userCommands.Received(1).Execute(nextCommand);
+            userCommands.Received(1).Execute(new NextPageCommand(null, null));
+            userCommands.DidNotReceive().Execute(new ExitCommand());
         }
 
-        [TestCase("p", "x")]
-        [TestCase("previous", "exit")]
-        public void Show_UserEntersPrevious_ShowsPreviousPageAndExits(string previousCommand, string exitCommand)
+        [Test]
+        public void Show_UserEntersPrevious_ShowsPreviousPageAndExits()
         {
             var userCommands = Substitute.For<UserCommands>();
-            var cmdStub = Substitute.For<UserCommandReceiver>();
-            var sut = new CsvViewer(cmdStub, userCommands);
+            var user = Substitute.For<User>();
+            var sut = new CsvViewer(user, userCommands);
 
-            cmdStub.ReceiveUserCommand().Returns(previousCommand, exitCommand);
+            user.EnteredCommand().Returns(new PreviousPageCommand(null, null), new ExitCommand());
 
             sut.Execute();
 
             userCommands.Received(1).FirstPage();
-            userCommands.Received(1).Execute(previousCommand);
+            userCommands.Received(1).Execute(new PreviousPageCommand(null, null));
+            userCommands.DidNotReceive().Execute(new ExitCommand());
         }
 
-        [TestCase("l", "x")]
-        [TestCase("last", "exit")]
-        public void Show_UserEntersLast_ShowsLastPageAndExits(string lastCommand, string exitCommand)
+        [Test]
+        public void Show_UserEntersLast_ShowsLastPageAndExits()
         {
             var userCommands = Substitute.For<UserCommands>();
-            var cmdStub = Substitute.For<UserCommandReceiver>();
-            var sut = new CsvViewer(cmdStub, userCommands);
+            var user = Substitute.For<User>();
+            var sut = new CsvViewer(user, userCommands);
 
-            cmdStub.ReceiveUserCommand().Returns(lastCommand, exitCommand);
+            user.EnteredCommand().Returns(new LastPageCommand(null, null), new ExitCommand());
 
             sut.Execute();
 
             userCommands.Received(1).FirstPage();
-            userCommands.Received(1).Execute(lastCommand);
+            userCommands.Received(1).Execute(new LastPageCommand(null, null));
+            userCommands.DidNotReceive().Execute(new ExitCommand());
         }
 
-        [TestCase("f", "x")]
-        [TestCase("first", "exit")]
-        public void Show_UserEntersFirst_ShowsFirstPageAndExits(string firstCommand, string exitCommand)
+        [Test]
+        public void Show_UserEntersFirst_ShowsFirstPageAndExits()
         {
             var userCommands = Substitute.For<UserCommands>();
-            var cmdStub = Substitute.For<UserCommandReceiver>();
-            var sut = new CsvViewer(cmdStub, userCommands);
+            var user = Substitute.For<User>();
+            var sut = new CsvViewer(user, userCommands);
 
-            cmdStub.ReceiveUserCommand().Returns(firstCommand, exitCommand);
+            user.EnteredCommand().Returns(new FirstPageCommand(null, null), new ExitCommand());
 
             sut.Execute();
 
             userCommands.Received(1).FirstPage();
-            userCommands.Received(1).Execute(firstCommand);
-        }
+            userCommands.Received(1).Execute(new FirstPageCommand(null, null));
+            userCommands.DidNotReceive().Execute(new ExitCommand());
 
-        [TestCase("")]
-        [TestCase(null)]
-        public void Show_UserEntersWrongCommand_CsvViewerShowsTableAndThrows(string wrongCommand)
-        {
-            var userCommands = Substitute.For<UserCommands>();
-            var cmdStub = Substitute.For<UserCommandReceiver>();
-            var sut = new CsvViewer(cmdStub, userCommands);
-
-            cmdStub.ReceiveUserCommand().Returns(wrongCommand);
-            
-            Assert.Throws<CsvViewer.InvalidUserCommand>(() => sut.Execute());
         }
     }
 }

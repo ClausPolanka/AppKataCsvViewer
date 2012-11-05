@@ -5,7 +5,7 @@ namespace AppKataCsvViewer
     public class MainEntryPoint
     {
         // Public for testing purposes.
-        public static UserCommandReceiverListener userCommandReceiverListener = new UserCommandReceiverListenerNullObject();
+        public static UserCommandReceiverListener user = new UserCommandReceiverListenerNullObject();
         
         private const int FILE_NAME = 0;
 
@@ -13,7 +13,7 @@ namespace AppKataCsvViewer
         {
             List<DataRecord> dataRecords = new CsvFileConverter().ToDataRecords(args[FILE_NAME]);
 
-            var csvUserCommands = new CsvUserCommands(
+            var userCommands = new CsvUserCommands(
                 new ConsoleDisplay(), 
                 new Table(
                     dataRecords, 
@@ -22,8 +22,8 @@ namespace AppKataCsvViewer
                         indexOfPageSize: 1).DetectPageSize(args)));
             
             var csvViewer = new CsvViewer(
-                new ConsoleUserUserCommandReceiver(userCommandReceiverListener), 
-                csvUserCommands);
+                new ConsoleUser(user, userCommands), 
+                userCommands);
             
             csvViewer.Execute();
         }
@@ -31,7 +31,7 @@ namespace AppKataCsvViewer
 
     public class UserCommandReceiverListenerNullObject : UserCommandReceiverListener
     {
-        public void NotifyNewCommand()
+        public virtual void NotifyNewCommand()
         {
         }
     }

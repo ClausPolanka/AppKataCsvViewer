@@ -18,16 +18,23 @@ namespace AppKataCsvViewer
             commands.Add("first", new FirstPageCommand(display, table));
             commands.Add("l", new LastPageCommand(display, table));
             commands.Add("last", new LastPageCommand(display, table));
+            commands.Add("x", new ExitCommand());
+            commands.Add("exit", new ExitCommand());
         }
 
-        public void Execute(string command)
+        public virtual void Execute(UserCommand command)
         {
-            commands[command.ToLower()].Execute();
+            command.Execute();
         }
 
-        public void FirstPage()
+        public virtual void FirstPage()
         {
             commands[NEXT].Execute();
+        }
+
+        public virtual UserCommand CreateCommand(string command)
+        {
+            return commands[command.ToLower()];
         }
     }
 }
